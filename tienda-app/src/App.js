@@ -11,7 +11,8 @@ import Nav from './Nav';
 function App() {
   return (
     <div>
-        
+
+
       <Router>
         <Routes>
 
@@ -20,6 +21,7 @@ function App() {
             <Route path='/signup' element = {<Signup/>}></Route>
             <Route path='/interfaz' element = {<Interfaz/>}></Route>
 
+            
         </Routes>
       
       </Router>
