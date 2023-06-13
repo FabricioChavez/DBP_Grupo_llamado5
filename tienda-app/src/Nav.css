@@ -1,0 +1,78 @@
+.text2 {
+    background-color: transparent;
+    border-style: solid;
+    border-color: blue;
+    letter-spacing: 0.1em;
+    color: blue;
+    position: absolute;
+    bottom: -63em;
+    left: 22.5em;
+    font-size: 200%;
+    font-family: "Comic Sans MS";
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    min-height: 2.5em;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+  }
+  
+
+.text2:hover{
+    
+    background-color: #EFEFFB;
+    box-shadow: 0 0 20px #EFEFFB;
+}
+
+.titulo1{
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(to right, white, white);
+    
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  position: absolute;
+  bottom: 7em;
+  left: 1.5em;
+  font-size: 400%;
+  font-family: "Comic Sans MS";
+  letter-spacing: 0.15em;
+  z-index: 3;
+  letter-spacing: 1px;
+  
+}
+
+.titulo2{
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(to right, white, white);
+    
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  position: absolute;
+  bottom: 7em;
+  left: 2em;
+  font-size: 300%;
+  font-family: "Comic Sans MS";
+  letter-spacing: 0.15em;
+  z-index: 3;
+  letter-spacing: 0px;
+
+}
+
+.titulono{
+font-family: 'Times New Roman', Times, serif;
+    background-image: linear-gradient(to right, white, white);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  position: absolute;
+  bottom: -23em;
+  left: 2em;
+  font-size: 300%;
+  font-family: "Comic Sans MS";
+  letter-spacing: 0em;
+  z-index: 10;
+  
+}
