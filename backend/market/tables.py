@@ -40,6 +40,7 @@ class Autor(db.Model):
     fechaNac = db.Column(db.Date, nullable=False)
 
     mangas = db.relationship('Manga', backref='autor', lazy=True)
+    compras_manga = db.relationship('Compra', backref='compra_user', lazy=True)
 
     def __repr__(self):
         return f'<Autor {self.id}>'
@@ -59,9 +60,10 @@ class Manga(db.Model):
     genero = db.Column(db.String(100), nullable=False)
     autor_id = db.Column(db.Integer, db.ForeignKey('autor.id'))
     comentarios_m = db.relationship('Comentario', backref='comentario_manga', lazy=True)
+    compras_manga = db.relationship('Compra', backref='compra_manga', lazy=True)
 
     def __repr__(self):
-        return f'<Manga {self.nombre} , {self.edicion}>'
+        return f'<Manga {self.nombre}, {self.edicion}>'
 
 
 @dataclass
@@ -73,27 +75,17 @@ class Comentario(db.Model):
     manga_edicion: int
     id = db.Column(db.Integer, primary_key=True)
     contenido = db.Column(db.String(1000))
-    user_id = db.Column(db.Integer, db.ForeignKey('user_id_cm'))
-    manga_nombre = db.Column(db.String(100), db.ForeignKey('manga_nombre_cm'))
-    manga_edicion = db.Column(db.Integer, db.ForeignKey('manga_edicion_cm'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    manga_nombre = db.Column(db.String(100), db.ForeignKey('manga.nombre'))
+    manga_edicion = db.Column(db.Integer, db.ForeignKey('manga.edicion'))
 
     def __repr__(self):
         return f'<Comentario {self.contenido}>'
 
 
 @dataclass
-class Compra(db.Model):
-    user_id: int
-    manga_nombre: str
-    manga_edicion: int
-    fecha_compra: date
-    user_id = db.Column(db.Integer, db.ForeignKey('user_id_co'))
-    manga_nombre = db.Column(db.String(100), db.ForeignKey('manga_nombre_co'))
-    manga_edicion = db.Column(db.Integer, db.ForeignKey('manga_edicion_co'))
-    fecha_compra=db.Column(db.Date,nullable=False)
-
-    def __repr__(self):
-        return f'<User{self.user_id}, Manga{self.manga_nombre}>'
-
-
-
+class Compra:
+    id_user = db.Column(db.Integer, db.ForeignKey('User.id'), primary_key=True)
+    manga_nombre = db.Column(db.String(100), db.ForeignKey('Manga.nombre'), primary_key=True)
+    manga_edicion = db.Column(db.Integer, db.ForeignKey('Manga.edicion'), primary_key=True)
+    fecha = db.Column(db.Date)

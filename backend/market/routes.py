@@ -1,7 +1,7 @@
 from market import app
 from market import db
 from flask import render_template, jsonify, request, redirect, url_for, flash
-from market.tables import User, Autor, Manga
+from market.tables import User, Autor, Manga,  Comentario
 from datetime import datetime
 
 with app.app_context():
