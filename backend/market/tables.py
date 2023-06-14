@@ -13,7 +13,7 @@ class User(db.Model):
     lastname: str
     fechaNac: date
     pais: str
-
+    password : str
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -21,8 +21,9 @@ class User(db.Model):
     lastname = db.Column(db.String(80), nullable=False)
     fechaNac = db.Column(db.Date, nullable=False)
     pais = db.Column(db.String(80), nullable=False)
-    comentarios_u = db.relationship('Comentario', backref='comentario_user', lazy=True)
-
+    password = db.Column(db.String(80) , nullable = False)
+    comentarios = db.relationship('Comentario', backref='user', lazy=True)
+    compras_user = db.relationship('Compra' , backref = 'user' , lazy = True)
     def __repr__(self):
         return f'<User {self.username}>'
 
@@ -40,7 +41,6 @@ class Autor(db.Model):
     fechaNac = db.Column(db.Date, nullable=False)
 
     mangas = db.relationship('Manga', backref='autor', lazy=True)
-    compras_manga = db.relationship('Compra', backref='compra_user', lazy=True)
 
     def __repr__(self):
         return f'<Autor {self.id}>'
@@ -53,14 +53,17 @@ class Manga(db.Model):
     cant_stock: int
     genero: str
     autor_id: int
+    precio : float
+
 
     nombre = db.Column(db.String(100), primary_key=True)
     edicion = db.Column(db.Integer, primary_key=True)
     cant_stock = db.Column(db.Integer, nullable=False)
     genero = db.Column(db.String(100), nullable=False)
+    precio = db.Column(db.Float , nullable = False)
     autor_id = db.Column(db.Integer, db.ForeignKey('autor.id'))
-    comentarios_m = db.relationship('Comentario', backref='comentario_manga', lazy=True)
-    compras_manga = db.relationship('Compra', backref='compra_manga', lazy=True)
+    comentarios_m = db.relationship('Comentario', backref='manga', lazy=True)
+    compras_manga = db.relationship('Compra', backref='manga', lazy=True)
 
     def __repr__(self):
         return f'<Manga {self.nombre}, {self.edicion}>'
@@ -74,18 +77,25 @@ class Comentario(db.Model):
     manga_nombre: str
     manga_edicion: int
     id = db.Column(db.Integer, primary_key=True)
-    contenido = db.Column(db.String(1000))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    manga_nombre = db.Column(db.String(100), db.ForeignKey('manga.nombre'))
-    manga_edicion = db.Column(db.Integer, db.ForeignKey('manga.edicion'))
+    contenido = db.Column(db.String(1000) , nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id') , nullable = False)
+    manga_nombre = db.Column(db.String(100), db.ForeignKey('manga.nombre') , nullable = False)
+    manga_edicion = db.Column(db.Integer, db.ForeignKey('manga.edicion') , nullable = False)
 
     def __repr__(self):
         return f'<Comentario {self.contenido}>'
 
 
 @dataclass
-class Compra:
-    id_user = db.Column(db.Integer, db.ForeignKey('User.id'), primary_key=True)
-    manga_nombre = db.Column(db.String(100), db.ForeignKey('Manga.nombre'), primary_key=True)
-    manga_edicion = db.Column(db.Integer, db.ForeignKey('Manga.edicion'), primary_key=True)
-    fecha = db.Column(db.Date)
+class Compra(db.Model):
+    id : int
+    id_user : int
+    manga_nombre : str
+    manga_edicion : int
+    fecha : date
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True )
+    id_user = db.Column(db.Integer, db.ForeignKey('user.id') , nullable = False)
+    manga_nombre = db.Column(db.String(100), db.ForeignKey('manga.nombre') , nullable = False)
+    manga_edicion = db.Column(db.Integer, db.ForeignKey('manga.edicion') , nullable = False)
+    fecha = db.Column(db.Date , nullable = False)
