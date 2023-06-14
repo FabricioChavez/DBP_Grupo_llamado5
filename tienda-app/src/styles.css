@@ -1,7 +1,54 @@
-.App {
-    font-family: sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  background-color: #26292B;
+}
+label{
+  color: #A2B2EE;
+}
+.Cuadro{
+  position:absolute;
+  left: 30%;
+  top: 25%;
+  transform: translate(-100%, -100%);
+}
+.Cuadro2{
+  position: absolute;
+  left: 80%;
+  top: 25%;
+  transform: translate(-100%, -100%);
+}
+.box{
+  min-width: 400px;
+  background-color: #5F7ADB;
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  padding: 20px;
+  line-height: 2.2;
+}
+#image1{
+  position: absolute;
+  height: 25em;
+  bottom: 5em;
+  left: 10em;
+}
+#image2{
+  position: absolute;
+  height: 25em;
+  bottom: 5em;
+  left: 30em;
+}
+#image3{
+  position: absolute;
+  height: 25em;
+  bottom: 5em;
+  left: 50em;
+}
+.retipula{
+  background-color: #26292B;
+}
