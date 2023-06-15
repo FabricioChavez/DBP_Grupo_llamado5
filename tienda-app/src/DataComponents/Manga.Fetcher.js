@@ -1,13 +1,13 @@
-
 import React from "react"
-import AutorList from "./AutorList";
+import Interfaz from "../Interfaz.js";
 import { useState , useEffect } from "react";
-function Autor_fetch(){
 
-    const [data ,setdata]=useState([])
+function Manga_fetch(){
+
+    const [manga ,setmanga]=useState([])
 
     useEffect(()=>{
-        fetch('http://127.0.0.1:5000/autor',
+        fetch('http://127.0.0.1:5000/manga',
         {'methods':'GET',
           headers:{
             'Content-Type':'applications/json'
@@ -20,10 +20,10 @@ function Autor_fetch(){
     },[])
 
     return(
-        <AutorList data={data}/>
+        <Interfaz manga={manga}/>
 
     )
 
 }
 
-export default Autor_fetch
+export default Manga_fetch;

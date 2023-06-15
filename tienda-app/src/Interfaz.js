@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css'; // Import the CSS file
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Interfaz() {
+function Interfaz(props) {
   const cosa={
       backgroundColor:'#A2B2EE'
   }
@@ -43,9 +43,12 @@ function Interfaz() {
           </div>
         </div>
       </div>
-      <img src="https://i.pinimg.com/originals/ca/c9/16/cac916910b6e44c8b4a8642c26d6e893.jpg" id="image1" alt="Image 1" />
-      <img src="https://3.bp.blogspot.com/-Bvoonmlj74A/V2gbeRSyt5I/AAAAAAAAHPQ/Nm1dmgQ4nck9ldZk5MzmUjth4ID6e3tgwCLcB/s1600/One%2BPiece%2Bvol%2B18%2Boriginal%2Bde%2BJapon.png" id="image2" alt="Image 2" />
-      <img src="https://vignette.wikia.nocookie.net/dragonball/images/8/87/Portada_Manga_Super_1.png/revision/latest?cb=20160127202937&path-prefix=es" id="image3" alt="Image 3" />
+
+      <div  >
+
+
+      </div>
+
 
       </div>
           </>

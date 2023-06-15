@@ -92,7 +92,7 @@ def route_manga():
     elif request.method == 'POST':
         data = request.get_json()
         new_manga = Manga(nombre=data['nombre'], edicion=data['edicion'], cant_stock=data['cant_stock'],
-                          genero=data['genero'], autor_id=data['autor_id'], precio=data['precio'])
+                          genero=data['genero'], autor_id=data['autor_id'], precio=data['precio'] , link = data['link'])
         db.session.add(new_manga)
         db.session.commit()
         return 'SUCCESS'
@@ -112,6 +112,7 @@ def route_manga_id(nombre, edicion):
         current_manga.genero = data['genero']
         current_manga.autor_id = data['autor_id']
         current_manga.precio = data['precio']
+        current_manga.link = data['link']
         db.session.commit()
         return 'SUCCESS'
     elif request.method == 'DELETE':

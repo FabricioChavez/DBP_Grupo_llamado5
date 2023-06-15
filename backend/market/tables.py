@@ -1,9 +1,9 @@
 import datetime
-
 from market import db
 from dataclasses import dataclass
 from datetime import date
 from flask_sqlalchemy import SQLAlchemy
+
 
 @dataclass
 class User(db.Model):
@@ -64,12 +64,15 @@ class Manga(db.Model):
     genero: str
     autor_id: int
     precio : float
+    link : str
+
 
     nombre = db.Column(db.String(100), primary_key=True)
     edicion = db.Column(db.Integer, primary_key=True)
     cant_stock = db.Column(db.Integer, nullable=False)
     genero = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Float , nullable = False)
+    link = db.Column(db.String(500) , nullable = False , unique = True)
     autor_id = db.Column(db.Integer, db.ForeignKey('autor.id'))
     comentarios_m = db.relationship('Comentario', backref='manga', lazy=True,
                                     primaryjoin="and_(Manga.nombre == Comentario.manga_nombre, Manga.edicion == Comentario.manga_edicion)",
