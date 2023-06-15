@@ -58,6 +58,7 @@ class Autor(db.Model):
 
 @dataclass
 class Manga(db.Model):
+    id : int 
     nombre: str
     edicion: int
     cant_stock: int
@@ -66,14 +67,17 @@ class Manga(db.Model):
     precio : float
     link : str
 
-
-    nombre = db.Column(db.String(100), primary_key=True)
-    edicion = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer , primary_key = True)     
+    nombre = db.Column(db.String(100) , nullable = False)
+    edicion = db.Column(db.Integer , nullable = False)
     cant_stock = db.Column(db.Integer, nullable=False)
     genero = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Float , nullable = False)
-    link = db.Column(db.String(500) , nullable = False , unique = True)
+    link = db.Column(db.String(500) , nullable = False , unique = True) 
     autor_id = db.Column(db.Integer, db.ForeignKey('autor.id'))
+
+    __table_args__ = (db.UniqueConstraint('nombre', 'edicion', name='identificadorManga'),)
+
     comentarios_m = db.relationship('Comentario', backref='manga', lazy=True,
                                     primaryjoin="and_(Manga.nombre == Comentario.manga_nombre, Manga.edicion == Comentario.manga_edicion)",
                                     foreign_keys="[Comentario.manga_nombre, Comentario.manga_edicion]")

@@ -98,14 +98,15 @@ def route_manga():
         return 'SUCCESS'
 
 
-@app.route('/manga/<nombre>/<edicion>', methods=['GET', 'PUT', 'DELETE'])
-def route_manga_id(nombre, edicion):
+@app.route('/manga/<manga_id>', methods=['GET', 'PUT', 'DELETE'])
+def route_manga_id(manga_id):
     if request.method == 'GET':
-        manga = Manga.query.filter_by(nombre=nombre, edicion=edicion).first_or_404()
+        manga = Manga.query.get_or_404(manga_id)
         return jsonify(manga)
+    
     elif request.method == 'PUT':
         data = request.get_json()
-        current_manga = Manga.query.filter_by(nombre=nombre, edicion=edicion).first_or_404()
+        current_manga = Manga.query.get_or_404(manga_id)
         current_manga.nombre = data['nombre']
         current_manga.edicion = data['edicion']
         current_manga.cant_stock = data['cant_stock']
@@ -115,11 +116,14 @@ def route_manga_id(nombre, edicion):
         current_manga.link = data['link']
         db.session.commit()
         return 'SUCCESS'
+    
     elif request.method == 'DELETE':
-        manga = Manga.query.filter_by(nombre=nombre, edicion=edicion).first_or_404()
+        manga = Manga.query.get_or_404(manga_id)
         db.session.delete(manga)
         db.session.commit()
         return 'SUCCESS'
+    
+
 @app.route('/comentario', methods=['GET', 'POST'])
 def route_comentario():
     if request.method == 'GET':
