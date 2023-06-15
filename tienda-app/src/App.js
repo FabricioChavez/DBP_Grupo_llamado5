@@ -7,6 +7,7 @@ import Interfaz from './Interfaz';
 import Autor_fetch from './DataComponents/AutorFetcher';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Nav from './Nav';
+import Manga_fetch from './DataComponents/MangaFetcher';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
            
             <Route path='/' element = {<Main/>}> </Route>
             <Route path='/prueba' element = {<Autor_fetch/>}> </Route>
+            <Route path='/prueba2' element = {<Manga_fetch/>}> </Route>
             <Route path='/login' element = {<Login/>}></Route>
             <Route path='/signup' element = {<Signup/>}></Route>
             <Route path='/interfaz' element = {<Interfaz/>}></Route>

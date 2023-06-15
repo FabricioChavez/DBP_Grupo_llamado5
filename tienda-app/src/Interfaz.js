@@ -44,11 +44,6 @@ function Interfaz(props) {
         </div>
       </div>
 
-      <div  >
-
-
-      </div>
-
 
       </div>
           </>
