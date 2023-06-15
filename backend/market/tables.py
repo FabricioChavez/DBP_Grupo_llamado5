@@ -1,8 +1,9 @@
+import datetime
+
 from market import db
 from dataclasses import dataclass
 from datetime import date
 from flask_sqlalchemy import SQLAlchemy
-
 
 @dataclass
 class User(db.Model):
@@ -11,7 +12,7 @@ class User(db.Model):
     email: str
     firstname: str
     lastname: str
-    fechaNac: date
+    fechaNac: str
     pais: str
     password : str
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -22,8 +23,8 @@ class User(db.Model):
     fechaNac = db.Column(db.Date, nullable=False)
     pais = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(80) , nullable = False)
-    comentarios = db.relationship('Comentario', backref='user', lazy=True)
-    compras_user = db.relationship('Compra' , backref = 'user' , lazy = True)
+    comentarios = db.relationship('Comentario', backref='user_a', lazy=True)
+    compras_user = db.relationship('Compra' , backref = 'user_b' , lazy = True)
     def __repr__(self):
         return f'<User {self.username}>'
 
@@ -55,15 +56,18 @@ class Manga(db.Model):
     autor_id: int
     precio : float
 
-
     nombre = db.Column(db.String(100), primary_key=True)
     edicion = db.Column(db.Integer, primary_key=True)
     cant_stock = db.Column(db.Integer, nullable=False)
     genero = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Float , nullable = False)
     autor_id = db.Column(db.Integer, db.ForeignKey('autor.id'))
-    comentarios_m = db.relationship('Comentario', backref='manga', lazy=True)
-    compras_manga = db.relationship('Compra', backref='manga', lazy=True)
+    comentarios_m = db.relationship('Comentario', backref='manga', lazy=True,
+                                    primaryjoin="and_(Manga.nombre == Comentario.manga_nombre, Manga.edicion == Comentario.manga_edicion)",
+                                    foreign_keys="[Comentario.manga_nombre, Comentario.manga_edicion]")
+    compras_manga = db.relationship('Compra', backref='manga', lazy=True,
+                                    primaryjoin="and_(Manga.nombre == Compra.manga_nombre, Manga.edicion == Compra.manga_edicion)",
+                                    foreign_keys="[Compra.manga_nombre, Compra.manga_edicion]")
 
     def __repr__(self):
         return f'<Manga {self.nombre}, {self.edicion}>'
@@ -79,8 +83,8 @@ class Comentario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     contenido = db.Column(db.String(1000) , nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id') , nullable = False)
-    manga_nombre = db.Column(db.String(100), db.ForeignKey('manga.nombre') , nullable = False)
-    manga_edicion = db.Column(db.Integer, db.ForeignKey('manga.edicion') , nullable = False)
+    manga_nombre = db.Column(db.String(100), db.ForeignKey('manga.nombre', ondelete="CASCADE") , nullable = False)
+    manga_edicion = db.Column(db.Integer, db.ForeignKey('manga.edicion', ondelete="CASCADE") , nullable = False)
 
     def __repr__(self):
         return f'<Comentario {self.contenido}>'
@@ -96,6 +100,6 @@ class Compra(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True )
     id_user = db.Column(db.Integer, db.ForeignKey('user.id') , nullable = False)
-    manga_nombre = db.Column(db.String(100), db.ForeignKey('manga.nombre') , nullable = False)
-    manga_edicion = db.Column(db.Integer, db.ForeignKey('manga.edicion') , nullable = False)
+    manga_nombre = db.Column(db.String(100), db.ForeignKey('manga.nombre', ondelete="CASCADE") , nullable = False)
+    manga_edicion = db.Column(db.Integer, db.ForeignKey('manga.edicion', ondelete="CASCADE") , nullable = False)
     fecha = db.Column(db.Date , nullable = False)
