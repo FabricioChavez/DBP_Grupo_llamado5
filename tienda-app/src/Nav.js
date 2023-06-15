@@ -13,13 +13,14 @@
 
   function Car() {
     const carrucelStyle = {
-      marginTop: "-84em",
-      marginBottom: "0em"
+      marginTop: "-75%",
+      marginBottom: "0%"
     };
   
     const containerStyle = {
       position: "relative",
-      height: "20em" 
+      top:"20%",
+      height: "20%" 
     };
     const imageStyle = {
       maxWidth: "100%",
@@ -61,18 +62,18 @@ const rootElement = document.getElementById("root");
 
 function Navbar({ children }) {
   const navLinkStyle = {
-    marginRight: "10em",
+    marginRight: "300%",
     
   };
   const Logo = {
     position: "absolute",
-    left: "1em",
+    left: "2%",
   };
   const Navbartotal = {
     position: "fixed",
     zIndex: 9999,
     width: "120%",
-    height:"5em",
+    height:"10%",
     background: "white",
   };
 
@@ -127,9 +128,9 @@ function Navbar({ children }) {
 function Buscar() {
   const buscadorStyle = {
     position: "absolute",
-    top: "7em",
-    right: "32em",
-    width:"50em",
+    top: "12.5%",
+    right: "26%",
+    width:"50%",
     
     zIndex: 0,
   };
@@ -175,7 +176,7 @@ function Principal2() {
       height: "70%",    
       background: "#A9BCF5",
      position: "absolute",
-      top: "140em",
+      top: "210%",
       left: "50%",
       transform: "translate(-50%, -50%)",
     };
@@ -188,10 +189,11 @@ function Principal2() {
   }
 
   
+      
   function Final() {
     const rectangulStyle = {
       width: "100%",
-      height: "16em",
+      height: "200%",
       background: "white",
       position: "relative",
       textAlign: "center",
@@ -199,7 +201,7 @@ function Principal2() {
       zIndex:0
     };
     const pagos = {
-        width: "130em",
+        width: "130%",
         height: "10em",
         background: "white",
         position: "relative",
@@ -227,6 +229,7 @@ function Principal2() {
       );
       
   }
+  
   function TextoAnimesMas() {
     const textStyles = {
         backgroundImage: "linear-gradient(to right, #3366ff, #00cc00), linear-gradient(to bottom, #3366ff, #FFFFFF)",
@@ -234,11 +237,11 @@ function Principal2() {
         WebkitBackgroundClip: "text", 
         color: "transparent",
         position: "absolute",
-        bottom: "-3em",
-        left: "8em",
+        bottom: "-13%",
+        left: "28%",
         fontSize: "400%",
         fontFamily: "Comic Sans MS	",
-        letterSpacing: "0.15em",
+        letterSpacing: "0.15%",
         zIndex: 3
     };
   
@@ -253,10 +256,10 @@ function Principal2() {
 function Cards1() {
     const cartas={
         position:"absolute",
-        top:"80em",
-        width:"50em",
-        height:"20em",
-        left:"3em"
+        top:"134%",
+        left:"5%",
+        width:"40% ",
+        height:"33%"
     }
   return (
     <div className="card text-bg-dark" style={cartas}>
@@ -274,10 +277,10 @@ function Cards1() {
 function Cards2() {
     const cartas={
         position:"absolute",
-        top:"80em",
-        left:"60em",
-        width:"50em",
-        height:"20em"
+        top:"134%",
+        left:"54%",
+        width:"40%",
+        height:"33%"
     }
   
  
@@ -301,9 +304,9 @@ function Extra(){
         WebkitBackgroundClip: "text", 
         color: "transparent",
         position: "absolute",
-        bottom: "-50em",
-        left: "17.5em",
-        fontSize: "230%",
+        bottom: "-195%",
+        left: "36%",
+        fontSize: "250%",
         fontFamily: "Comic Sans MS	",
         letterSpacing: "0.15em",
         zIndex: 7
@@ -344,9 +347,9 @@ function Titulo(){
 function Imagenes(){
   const cosa={
     position:"absolute",
-    top:"20em",
+    top:"20%",
     height:"70%",
-    left:"80em"
+    left:"60%"
   }
   return ( 
   <div>
