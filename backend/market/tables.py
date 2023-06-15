@@ -20,11 +20,20 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     firstname = db.Column(db.String(80), nullable=False)
     lastname = db.Column(db.String(80), nullable=False)
-    fechaNac = db.Column(db.Date, nullable=False)
+    fechaNac = db.Column(db.String(10), nullable=False)
     pais = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(80) , nullable = False)
     comentarios = db.relationship('Comentario', backref='user_a', lazy=True)
     compras_user = db.relationship('Compra' , backref = 'user_b' , lazy = True)
+
+    def __init__(self, username, email, firstname, lastname, fechaNac, pais, password):
+        self.username = username
+        self.email = email
+        self.firstname = firstname
+        self.lastname = lastname
+        self.fechaNac = fechaNac
+        self.pais = pais
+        self.password = password
     def __repr__(self):
         return f'<User {self.username}>'
 
