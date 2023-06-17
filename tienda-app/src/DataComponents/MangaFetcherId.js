@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-function MangaFetcherId({ id }) {
+function MangaFetcherId(props) {
+const {id}=props
   const [manga, setManga] = useState(null);
 
   useEffect(() => {
@@ -24,6 +26,7 @@ function MangaFetcherId({ id }) {
         <h2>Stock: {manga.cant_stock}</h2>
         <h2>Género: {manga.genero}</h2>
         <h2>Precio: {manga.precio}</h2>
+        <button className="btn btn-primary">Comprar</button>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import MangaList from "./mangalist.js";
+import {MangaList} from "./mangalist.js";
 import { useState, useEffect } from "react";
 
 function Manga_fetch() {

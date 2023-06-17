@@ -7,6 +7,8 @@ function Interfaz(props) {
   const cosa={
       backgroundColor:'#26292B'
   }
+
+
   return (
    
     <>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import MangaFetcherId from "./MangaFetcherId";
 
 const MangaListContainer = styled.div`
   display: grid;
@@ -28,11 +30,21 @@ const MangaImage = styled.img`
   animation: colorAnimation 3s infinite;
 
   @keyframes colorAnimation {
-    0% { border-color: rgb(0,255,159); }
-    25% { border-color: rgb(0,184,255); }
-    50% { border-color: rgb(0,30,255); }
-    75% { border-color: rgb(189,0,255); }
-    100% { border-color: rgb(214,0,255); }
+    0% {
+      border-color: rgb(0, 255, 159);
+    }
+    25% {
+      border-color: rgb(0, 184, 255);
+    }
+    50% {
+      border-color: rgb(0, 30, 255);
+    }
+    75% {
+      border-color: rgb(189, 0, 255);
+    }
+    100% {
+      border-color: rgb(214, 0, 255);
+    }
   }
 `;
 
@@ -42,14 +54,18 @@ const MangaName = styled.h2`
 
 function MangaList(props) {
   const { manga } = props;
-  const [selectedManga, setSelectedManga] = useState(null);
+  const [selectedMangaId, setSelectedMangaId] = useState(null);
 
   const handleMouseEnter = (manga) => {
-    setSelectedManga(manga);
+    setSelectedMangaId(manga.id);
   };
 
   const handleMouseLeave = () => {
-    setSelectedManga(null);
+    setSelectedMangaId(null);
+  };
+
+  const handleClick = (id) => {
+    setSelectedMangaId(id);
   };
 
   return (
@@ -57,7 +73,10 @@ function MangaList(props) {
       {manga.map((manga, index) => (
         <MangaItem
           key={manga.id}
-          style={{ gridRow: index > 2 ? "2" : "1", gridColumn: (index % 3) + 1 }}
+          style={{
+            gridRow: index > 2 ? "2" : "1",
+            gridColumn: (index % 3) + 1,
+          }}
           onMouseEnter={() => handleMouseEnter(manga)}
           onMouseLeave={handleMouseLeave}
         >
@@ -66,20 +85,24 @@ function MangaList(props) {
             id={manga.id}
             alt={manga.nombre}
             style={{
-              border: selectedManga === manga ? "6px solid red" : "4px solid",
+              border: selectedMangaId === manga.id ? "6px solid red" : "4px solid",
             }}
           />
           <MangaName
             style={{
-              transform: selectedManga === manga ? "scale(1.1)" : "scale(1)",
+              transform: selectedMangaId === manga.id ? "scale(1.1)" : "scale(1)",
             }}
           >
             {manga.nombre}
           </MangaName>
+          <Link to={`/MasInfo/${manga.id}`}>
+            <button>MAS INFO</button>
+          </Link> 
         </MangaItem>
       ))}
+
     </MangaListContainer>
   );
 }
 
-export default MangaList;
+export { MangaList };
