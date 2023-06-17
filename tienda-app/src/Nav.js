@@ -3,6 +3,7 @@
   import ReactDOM from "react-dom";
   import Carousel from "react-elastic-carousel";
   import Item from "./Item";
+  import { useState, useEffect } from "react";
 
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
@@ -27,38 +28,36 @@
       maxHeight: "100%",
       objectFit: "cover"
         };
-  
+        const [manga, setManga] = useState([]);
+
+        useEffect(() => {
+          fetch("http://127.0.0.1:5000/manga", {
+            'methods': "GET",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+            .then(resp => resp.json())
+            .then(resp => setManga(resp))
+            .catch(error => console.log(error));
+        }, []);
     return (
       <div className="Car" style={containerStyle}>
         <div style={carrucelStyle}>
-          <Carousel breakPoints={breakPoints}>
-            <Item>
-            <img style={imageStyle}  src="https://elcomercio.pe/resizer/f5lcG_SPYS-M-CdJCkzRBRB4ncI=/640x0/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/7GIIGO2GA5FJBMKXN5XT4KA3NU.jpg" alt="Imagen 1" />
-              </Item>
-            <Item>
-            <img style={imageStyle} src="https://images.justwatch.com/poster/8599353/s592/death-note" ></img>
+        
+        <Carousel breakPoints={breakPoints}>
+          {manga.map((manga, index) => (
+            <Item id={manga.id}>
+              <img style={imageStyle} src={manga.link} alt="Imagen 1" />
             </Item>
-            <Item>
-            <img style={imageStyle} src="https://image.api.playstation.com/vulcan/ap/rnd/202106/1704/2ZfAUG5CTXdM34S1OhmMW1zF.jpg" ></img>
-
-            </Item>
-            <Item>
-            <img style={imageStyle} src="https://m.media-amazon.com/images/M/MV5BMmI5NmFlZjItOTBhOC00NGI0LWIyNDAtODJhOTJjZDEyMTYyXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg" ></img>
-
-            </Item>
-            <Item>
-            <img style={imageStyle} src="https://www.crisol.com.pe/media/catalog/product/cache/cf84e6047db2ba7f2d5c381080c69ffe/9/7/9788417292669_vr0q2ef9dum4yxjx.jpg" ></img>
-
-            </Item>
-            
-          </Carousel>
+          ))}
+        </Carousel>
+         
         </div>
       </div>
     );
   }
-  
 const rootElement = document.getElementById("root");
-
 
 function Navbar({ children }) {
   const navLinkStyle = {
