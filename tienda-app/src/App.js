@@ -28,8 +28,9 @@ function App() {
             <Route path="/MasInfo/:id" element={<Componente/>} />
             <Route path='/login' element = {<Login/>}></Route>
             <Route path='/signup' element = {<Signup/>}></Route>
-            <Route path='/interfaz' element = {<Interfaz/>}></Route>
+            <Route path='/interfaz/:id_user' element = {<Interfaz/>}></Route>
 
+            
             
         </Routes>
       
