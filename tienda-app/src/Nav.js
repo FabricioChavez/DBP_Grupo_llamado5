@@ -59,6 +59,7 @@
   }
 const rootElement = document.getElementById("root");
 
+
 function Navbar({ children }) {
   const navLinkStyle = {
     marginRight: "300%",
@@ -352,7 +353,7 @@ function Imagenes(){
   }
   return ( 
   <div>
-    <img style={cosa} src="https://mario.nintendo.com/static/f350c31adcd6378b913f7660db299714/7e15c/mario.png"/> 
+    <img style={cosa} src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6d884f9f-e1ae-4073-b972-4cb8869f91d2/d93pm75-0db4498d-1b04-4812-8ef3-a3682e1064ae.png/v1/fill/w_669,h_896/madoka_magica_renders__maid_dress_kaname_madoka_by_asamirosa_d93pm75-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9ODk2IiwicGF0aCI6IlwvZlwvNmQ4ODRmOWYtZTFhZS00MDczLWI5NzItNGNiODg2OWY5MWQyXC9kOTNwbTc1LTBkYjQ0OThkLTFiMDQtNDgxMi04ZWYzLWEzNjgyZTEwNjRhZS5wbmciLCJ3aWR0aCI6Ijw9NjY5In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.jxsuipMqZJRtUgLbZTbdG6Pk6hSyjfFtmeN9a05Fu_0"/> 
   </div>);
  
 }
