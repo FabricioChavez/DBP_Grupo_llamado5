@@ -5,7 +5,6 @@ from market.tables import User, Autor, Manga, Comentario, Compra
 from datetime import datetime
 
 
-
 with app.app_context():
     db.create_all()
 
@@ -215,15 +214,20 @@ def route_compra_id(compra_id):
 
 @app.route('/signup', methods=[ 'POST'])
 def signup():
-    email = request.json["email"]
-    password = request.json["password"]
+    username = request.json.get("username")
+    email = request.json.get("email")
+    firstname = request.json.get("firstname")
+    lastname = request.json.get("lastname")
+    fechaNac = request.json.get("fechaNac")
+    pais = request.json.get("pais")
+    password = request.json.get("password")
 
     user_exists = User.query.filter_by(email=email).first() is not None
 
     if user_exists:
         return jsonify({"error": "El correo electrónico ya está en uso"}), 409
 
-    new_user = User(email=email, password=password)
+    new_user = User(username=username, email=email, firstname=firstname, lastname=lastname, fechaNac=fechaNac, pais=pais, password=password)
     db.session.add(new_user)
     db.session.commit()
 
@@ -233,6 +237,7 @@ def signup():
         "id": new_user.id,
         "email": new_user.email
     })
+
 
 
 @app.route("/login", methods=["POST"])

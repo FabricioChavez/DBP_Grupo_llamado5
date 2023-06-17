@@ -1,74 +1,92 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
+function Signup() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [fechaNac, setFechaNac] = useState('');
+  const [pais, setPais] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-function Signup(){
+  const registerUser = () => {
+    axios.post('http://127.0.0.1:5000/signup', {
+      username: username,
+      email: email,
+      firstname: firstname,
+      lastname: lastname,
+      fechaNac: fechaNac,
+      pais: pais,
+      password: password
+    })
+      .then(function (response) {
+        console.log(response);
+        navigate("/login");
+      })
+      .catch(function (error) {
+        console.log(error, 'error');
+        if (error.response.status === 401) {
+          alert("Invalid credentials");
+        }
+      });
+  };
 
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
-   
-    const navigate = useNavigate();
-     
-    const registerUser = () => {
-        axios.post('http://127.0.0.1:5000/signup', {
-            email: email,
-            password: password
-        })
-        .then(function (response) {
-             console.log(response);
-            navigate("/interfaz");
-        })
-        .catch(function (error) {
-            console.log(error, 'error');
-            if (error.response.status === 401) {
-                alert("Invalid credentials");
-            }
-        });
-    };
-
-
-    return(
-        <div  style={{display : "flex" , justifyContent : "center" , alignItems: "center" , height: "100vh" , backgroundColor: "lightblue"}}>
-        <div  className="100-w p-5 rounded bg-white">
-            <form>
-            <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                    <p className="lead fw-normal mb-0 me-3">Create Your Account</p>
-                  </div>
- 
-                  <div className="form-outline mb-4">
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id="form3Example3" className="form-control form-control-lg" placeholder="Enter a valid email address" />
-                    <label className="form-label" for="form3Example3">Email address</label>
-                  </div>
- 
-             
-                  <div className="form-outline mb-3">
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} id="form3Example4" className="form-control form-control-lg" placeholder="Enter password" />
-                    <label className="form-label" for="form3Example4">Password</label>
-                  </div>
- 
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div className="form-check mb-0">
-                      <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                      <label className="form-check-label" for="form2Example3">
-                        Remember me
-                      </label>
-                    </div>
-                    <a href="#!" className="text-body">Forgot password?</a>
-                  </div>
- 
-                  <div className="text-center text-lg-start mt-4 pt-2">
-                    <button type="button" className="btn btn-primary btn-lg" onClick={() => registerUser()} >Sign Up</button>
-                    <p className="small fw-bold mt-2 pt-1 mb-0">Login to your account <a href="/login" className="link-danger">Login</a></p>
-                  </div>
-
-            </form>           
-        
-        
-        </div>    
-     </div>   
-    )
+  return (
+    <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh", backgroundColor: "lightblue" }}>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-6">
+            <div className="card bg-white p-5 rounded">
+              <h1 className="card-title text-center mb-4">Create Your Account</h1>
+              <form>
+                <div className="form-group">
+                  <label htmlFor="username">Username</label>
+                  <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="form-control" id="username" placeholder="Enter your username" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email address</label>
+                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" id="email" placeholder="Enter a valid email address" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="firstname">First Name</label>
+                  <input type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)} className="form-control" id="firstname" placeholder="Enter your first name" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="lastname">Last Name</label>
+                  <input type="text" value={lastname} onChange={(e) => setLastname(e.target.value)} className="form-control" id="lastname" placeholder="Enter your last name" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="fechaNac">Date of Birth</label>
+                  <input type="text" value={fechaNac} onChange={(e) => setFechaNac(e.target.value)} className="form-control" id="fechaNac" placeholder="Enter your date of birth" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="pais">Country</label>
+                  <input type="text" value={pais} onChange={(e) => setPais(e.target.value)} className="form-control" id="pais" placeholder="Enter your country" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" id="password" placeholder="Enter password" />
+                </div>
+                <div className="form-check mb-3">
+                  <input className="form-check-input" type="checkbox" value="" id="rememberMe" />
+                  <label className="form-check-label" htmlFor="rememberMe">
+                    Remember me
+                  </label>
+                </div>
+                <div className="text-center">
+                  <button type="button" className="btn btn-primary" onClick={registerUser}>Sign Up</button>
+                </div>
+              </form>
+              <p className="small text-center mt-3 mb-0">Already have an account? <a href="/login" className="text-danger">Login</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default Signup;
