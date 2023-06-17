@@ -31,7 +31,7 @@
         const [manga, setManga] = useState([]);
 
         useEffect(() => {
-          fetch("http://127.0.0.1:5000/manga", {
+          fetch("http://192.168.1.45:5000/manga", {
             'methods': "GET",
             headers: {
               "Content-Type": "application/json"

@@ -1,12 +1,13 @@
 import React from "react";
 import {MangaList} from "./mangalist.js";
 import { useState, useEffect } from "react";
-
-function Manga_fetch() {
+import { useParams } from "react-router-dom";
+function MangaFetcherName({name}) {
+  
   const [manga, setManga] = useState([]);
 
   useEffect(() => {
-    fetch("http://192.168.1.45:5000/manga", {
+    fetch(`http://192.168.1.45:5000/manga/byn/${name}`, {
       'methods': "GET",
       headers: {
         "Content-Type": "application/json"
@@ -17,7 +18,13 @@ function Manga_fetch() {
       .catch(error => console.log(error));
   }, []);
 
-  return <MangaList manga={manga} />;
+  return (
+    <div>
+    <p>devolviendo {name}</p>
+    <MangaList manga={manga}/>
+    </div>
+  )
+  
 }
 
-export default Manga_fetch;
+export default MangaFetcherName;

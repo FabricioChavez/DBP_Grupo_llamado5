@@ -84,6 +84,8 @@ def route_autor_id(autor_id):
         autor.fechaNac = fecha
         db.session.commit()
         return 'SUCCESS'
+
+
 @app.route('/manga', methods=['GET', 'POST'])
 def route_manga():
     if request.method == 'GET':
@@ -92,10 +94,23 @@ def route_manga():
     elif request.method == 'POST':
         data = request.get_json()
         new_manga = Manga(nombre=data['nombre'], edicion=data['edicion'], cant_stock=data['cant_stock'],
-                          genero=data['genero'], autor_id=data['autor_id'], precio=data['precio'] , link = data['link'])
+                          genero=data['genero'], autor_id=data['autor_id'], precio=data['precio'], link=data['link'])
+
         db.session.add(new_manga)
         db.session.commit()
         return 'SUCCESS'
+
+
+@app.route('/manga/by/<genre>', methods=['GET'])
+def route_manga_by_genre(genre):
+    manga = Manga.query.filter_by(genero=genre).all()
+    return jsonify(manga)
+
+
+@app.route('/manga/byn/<name>', methods=['GET'])
+def route_manga_by_name(name):
+    manga = Manga.query.filter_by(nombre=name).all()
+    return jsonify(manga)
 
 
 @app.route('/manga/<manga_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -103,7 +118,7 @@ def route_manga_id(manga_id):
     if request.method == 'GET':
         manga = Manga.query.get_or_404(manga_id)
         return jsonify(manga)
-    
+
     elif request.method == 'PUT':
         data = request.get_json()
         current_manga = Manga.query.get_or_404(manga_id)
@@ -116,13 +131,13 @@ def route_manga_id(manga_id):
         current_manga.link = data['link']
         db.session.commit()
         return 'SUCCESS'
-    
+
     elif request.method == 'DELETE':
         manga = Manga.query.get_or_404(manga_id)
         db.session.delete(manga)
         db.session.commit()
         return 'SUCCESS'
-    
+
 
 @app.route('/comentario', methods=['GET', 'POST'])
 def route_comentario():
@@ -157,6 +172,8 @@ def route_comentario_id(comentario_id):
         db.session.delete(comentario)
         db.session.commit()
         return 'SUCCESS'
+
+
 @app.route('/compra', methods=['GET', 'POST'])
 def route_compra():
     if request.method == 'GET':

@@ -7,13 +7,13 @@ import Interfaz from './Interfaz';
 import Autor_fetch from './DataComponents/AutorFetcher';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Nav from './Nav';
-import Manga_fetch from './DataComponents/MangaFetcher';
-import MangaFetcherId from './DataComponents/MangaFetcherId';
 import Componente from './DataComponents/component';
-
+import MangaFetcherGenre from './DataComponents/MangaFetcherGenre';
+import MangaFetcherId from './DataComponents/MangaFetcherId';
+import MangaFetcherName from './DataComponents/MangaFetcherName';
 function App() {
  
- 
+ const genre="Seinen";
  
   return (
     <div>
@@ -23,7 +23,8 @@ function App() {
         <Routes>
            
             <Route path='/' element = {<Main/>}> </Route>
-            <Route path='/prueba' element = {<Autor_fetch/>}> </Route>
+            <Route path='/prueba/:genero' element = {<MangaFetcherGenre />}> </Route>
+            <Route path='/prueba2/:name' element = {<MangaFetcherName />}> </Route>
             <Route path="/MasInfo/:id" element={<Componente/>} />
             <Route path='/login' element = {<Login/>}></Route>
             <Route path='/signup' element = {<Signup/>}></Route>
