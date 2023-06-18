@@ -23,8 +23,8 @@ const MangaItem = styled.div`
 `;
 
 const MangaImage = styled.img`
-  height: 500px;
-  width: 100%;
+  width: 300px;
+  height: 400px;
   object-fit: cover;
   border: 4px solid;
   animation: colorAnimation 3s infinite;
@@ -80,14 +80,16 @@ function MangaList(props) {
           onMouseEnter={() => handleMouseEnter(manga)}
           onMouseLeave={handleMouseLeave}
         >
-          <MangaImage
-            src={manga.link}
-            id={manga.id}
-            alt={manga.nombre}
-            style={{
-              border: selectedMangaId === manga.id ? "6px solid red" : "4px solid",
-            }}
-          />
+          <Link to={`/MasInfo/${manga.id}`}>
+            <MangaImage
+              src={manga.link}
+              id={manga.id}
+              alt={manga.nombre}
+              style={{
+                border: selectedMangaId === manga.id ? "6px solid red" : "4px solid",
+              }}
+            />
+          </Link>
           <MangaName
             style={{
               transform: selectedMangaId === manga.id ? "scale(1.1)" : "scale(1)",
@@ -95,12 +97,8 @@ function MangaList(props) {
           >
             {manga.nombre}
           </MangaName>
-          <Link to={`/MasInfo/${manga.id}`}>
-            <button>MAS INFO</button>
-          </Link> 
         </MangaItem>
       ))}
-
     </MangaListContainer>
   );
 }

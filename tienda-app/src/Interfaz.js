@@ -64,7 +64,10 @@ function Interfaz() {
             </div>
           </div>
         </div>
-        {content}
+
+        <div style={{marginTop: '10%'}}>
+          {content}
+        </div>
       </div>
     </>
   );
