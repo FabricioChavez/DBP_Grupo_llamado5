@@ -3,37 +3,35 @@
 }
 .MangaInfo {
     background-color: #262626;
-
+    position: absolute;
+     width: 100%;
+    height: 100%;
   }
   
 .Imagen {
-    position: relative;
-    left: 14rem;
-    top: 8rem;
-    width: 30vw;
-    height: 40rem;
-    margin-bottom: 0%;
+    position: absolute;
+    left: 15%;
+    top: 15%;
+    width: 30%;
+    height: 70%;
     border: 3px solid #A2B2EE;
     border-radius: 2%;
     z-index: 1;
   }
   
   .Texto {
-    position: relative;
-    left: 60rem;
-    bottom: 24rem;
-    width: 30vw;
-    height: 5vh;
+    position: absolute;
+    left: 60%;
+    bottom: 70%;
     z-index: 1;
     font-size: 2.6rem;
     color: #A2B2EE;
   }
 
   .Texto2{
-    position: relative;
-    left: 60rem;
-    bottom: 10rem;
-    width: 30vw;
+    position: absolute;
+    left: 60%;
+    bottom: 20%;
     z-index: 1;
     
   }
@@ -41,20 +39,18 @@
    
   .Text3 {
     position: absolute;
-    left: 60rem;
-    bottom: 70%;
-    width: 30vw;
+    left: 60.1%;
+    bottom: 60%;
     font-size: 2rem;
     color:#a6a6a7; 
     z-index: 1;
   }
 
   .Texto4{
-    position: relative;
-    left: 61rem;
-    bottom: 14rem;
+    position: absolute;
+    left: 60.1%;
+    bottom: 40%;
     font-size: 1.8rem;
-    width: 30vw;
     z-index: 1;
     color: #A2B2EE;
 
@@ -65,9 +61,8 @@
 
   .Texto5{
     position: absolute;
-    left: 60rem;
-    bottom: 70%;
-    width: 30vw;
+    left: 60.1%;
+    bottom: 80%;
     font-size: 1.3rem;
     color:#a6a6a7; 
     z-index: 1;
@@ -76,10 +71,9 @@
 
   .Texto6{
     position: absolute;
-    left: 61rem;
-    bottom: 50%;
+    left: 60.1%;
+    bottom: 60%;
     font-size: 1.8rem;
-    width: 30vw;
     color: #d4daf0;
     z-index: 1;
     
@@ -87,7 +81,7 @@
 
   .rectangulo {
     position: absolute;
-    top:17.5%;
+    top:10%;
     left: 5%;
     width: 90%; 
     height: 80%; 
@@ -96,7 +90,7 @@
   }
   .rectangulo2 {
     position: absolute;
-    top:17.5%;
+    top:10%;
     left: 55%;
     width: 40%; 
     height: 80%; 
