@@ -1,5 +1,5 @@
 import React from "react";
-import {Navbar,Buscar,Principal,Final, TextoAnimesMas,Cards1,Cards2,Extra,BottonExtra,Titulo,Principal2,Car,Imagenes} from "./Nav";
+import {Navbar,Buscar,Principal,Final, TextoAnimesMas,Cards1,Cards2,Extra,BottonExtra,Titulo,Principal2,Imagenes} from "./Nav";
 import { Link } from "react-router-dom";
 
 function Main() {
@@ -47,7 +47,6 @@ function Main() {
       <BottonExtra></BottonExtra>
       <Titulo></Titulo>
       <Principal2></Principal2>
-      <Car></Car>
 
 
       </div>   

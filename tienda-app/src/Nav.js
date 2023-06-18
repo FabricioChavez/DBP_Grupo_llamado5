@@ -5,59 +5,6 @@
   import Item from "./Item";
   import { useState, useEffect } from "react";
 
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 500, itemsToShow: 2 },
-    { width: 768, itemsToShow: 3 },
-    { width: 1200, itemsToShow: 4 },
-  ];
-
-  function Car() {
-    const carrucelStyle = {
-      marginTop: "-75%",
-      marginBottom: "0%"
-    };
-  
-    const containerStyle = {
-      position: "relative",
-      top:"20%",
-      height: "20%" 
-    };
-    const imageStyle = {
-      maxWidth: "100%",
-      maxHeight: "100%",
-      objectFit: "cover"
-        };
-        const [manga, setManga] = useState([]);
-
-        useEffect(() => {
-          fetch("http://127.0.0.1:5000/manga", {
-            'methods': "GET",
-            headers: {
-              "Content-Type": "application/json"
-            }
-          })
-            .then(resp => resp.json())
-            .then(resp => setManga(resp))
-            .catch(error => console.log(error));
-        }, []);
-    return (
-      <div className="Car" style={containerStyle}>
-        <div style={carrucelStyle}>
-        
-        <Carousel breakPoints={breakPoints}>
-          {manga.map((manga, index) => (
-            <Item id={manga.id}>
-              <img style={imageStyle} src={manga.link} alt="Imagen 1" />
-            </Item>
-          ))}
-        </Carousel>
-         
-        </div>
-      </div>
-    );
-  }
-const rootElement = document.getElementById("root");
 
 
 function Navbar({ children }) {
@@ -169,31 +116,86 @@ function Principal() {
   
   }
 
-
 function Principal2() {
-    const rectanguloStyle = {
-      width: "100%",
-      height: "70%",    
-      background: "#A9BCF5",
-     position: "absolute",
-      top: "210%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
+  const rectanguloStyle = {
+    width: "100%",
+    height: "70%",    
+    background: "#A9BCF5",
+    position: "absolute",
+    top: "210%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  };
+
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 500, itemsToShow: 2 },
+    { width: 768, itemsToShow: 3 },
+    { width: 1200, itemsToShow: 4 },
+  ];
+
+  function Car() {
+    const carrucelStyle = {
+     
+      position: "relative",
+      top: "-30vh"
     };
 
-   
+    const containerStyle = {
+      position: "relative",
+      top: "80%",
+    };
+    const imageStyle = {
+      maxWidth: "100%",
+      maxHeight: "100%",
+      objectFit: "cover"
+    };
+    const [manga, setManga] = useState([]);
 
+    useEffect(() => {
+      fetch("http://127.0.0.1:5000/manga", {
+        'methods': "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(resp => resp.json())
+        .then(resp => setManga(resp))
+        .catch(error => console.log(error));
+    }, []);
 
-    return <div style={rectanguloStyle}></div>;
-  
+    return (
+      <div className="Car" style={containerStyle}>
+        <div style={carrucelStyle}>
+          <Carousel breakPoints={breakPoints}>
+            {manga.map((manga, index) => (
+              <Item id={manga.id}>
+                <img style={imageStyle} src={manga.link} alt="Imagen 1" />
+              </Item>
+            ))}
+          </Carousel>
+        </div>
+      </div>
+    );
   }
+
+  return (
+    <div style={rectanguloStyle}>
+      {/* Contenido del componente */}
+      <Car />
+    </div>
+  );
+
+}
+const rootElement = document.getElementById("root");
+
 
   
       
   function Final() {
     const rectangulStyle = {
       width: "100%",
-      height: "200%",
+      height: "20em",
       background: "white",
       position: "relative",
       textAlign: "center",
@@ -203,7 +205,6 @@ function Principal2() {
     const pagos = {
         width: "130%",
         height: "10em",
-        background: "white",
         position: "relative",
         textAlign: "center",
         backgroundImage: 'url("https://www.escueladeriqueza.org/wp-content/uploads/tarjetas.png")',
@@ -211,11 +212,11 @@ function Principal2() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
 
-        zIndex: 2
+        zIndex: 0
       };
     const derecho={
         position:"relative",
-        top:"10em"
+        top:"10em",
 
     }
       
@@ -238,7 +239,7 @@ function Principal2() {
         color: "transparent",
         position: "absolute",
         bottom: "-13%",
-        left: "28%",
+        left: "32%",
         fontSize: "400%",
         fontFamily: "Comic Sans MS	",
         letterSpacing: "0.15%",
@@ -349,7 +350,7 @@ function Imagenes(){
     position:"absolute",
     top:"20%",
     height:"70%",
-    left:"60%"
+    left:"9%"
   }
   return ( 
   <div>
@@ -364,4 +365,4 @@ function Imagenes(){
 
   
 
-export { Navbar, Buscar ,Principal,Final, TextoAnimesMas,Cards1,Cards2,Extra,BottonExtra,Titulo,Principal2,Car,Imagenes};
+export { Navbar, Buscar ,Principal,Final, TextoAnimesMas,Cards1,Cards2,Extra,BottonExtra,Titulo,Principal2,Imagenes};
