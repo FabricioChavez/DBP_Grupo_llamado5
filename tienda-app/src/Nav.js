@@ -102,7 +102,7 @@ function Principal() {
     const rectanguloStyle = {
       width: "100%",
       height: "70%",    
-      background: "linear-gradient(180deg, #81F79F 0%, #58ACFA 50%, #F2F3F3 100%)",
+      background: "linear-gradient(180deg, #262626 0%, #A2B2EE 50%, #F2F3F3 100%)",
      position: "absolute",
       top: "55%",
       left: "50%",
