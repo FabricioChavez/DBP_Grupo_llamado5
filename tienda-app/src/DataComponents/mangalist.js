@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import MangaFetcherId from "./MangaFetcherId";
 
 const MangaListContainer = styled.div`
   display: grid;
@@ -53,7 +52,7 @@ const MangaName = styled.h2`
 `;
 
 function MangaList(props) {
-  const { manga } = props;
+  const { manga , userdata} = props;
   const [selectedMangaId, setSelectedMangaId] = useState(null);
 
   const handleMouseEnter = (manga) => {
@@ -80,7 +79,7 @@ function MangaList(props) {
           onMouseEnter={() => handleMouseEnter(manga)}
           onMouseLeave={handleMouseLeave}
         >
-          <Link to={`/MasInfo/${manga.id}`}>
+          <Link to={`/MasInfo` }>
             <MangaImage
               src={manga.link}
               id={manga.id}

@@ -1,8 +1,7 @@
 import React from "react";
 import {MangaList} from "./mangalist.js";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-function MangaFetcherName({name}) {
+function MangaFetcherName({ userdata , name}) {
   
   const [manga, setManga] = useState([]);
 

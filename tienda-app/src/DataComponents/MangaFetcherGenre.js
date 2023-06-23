@@ -1,16 +1,13 @@
-import React from "react";
-import {MangaList} from "./mangalist.js";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { MangaList } from "./mangalist.js";
 import { useParams } from "react-router-dom";
-function MangaFetcherGenre({genre}) {
-    const Param=useParams()
 
-
+function MangaFetcherGenre({ userdata, genre }) {
   const [manga, setManga] = useState([]);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:5000/manga/by/${genre}`, {
-      'methods': "GET",
+      method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
@@ -18,15 +15,14 @@ function MangaFetcherGenre({genre}) {
       .then(resp => resp.json())
       .then(resp => setManga(resp))
       .catch(error => console.log(error));
-  }, []);
+  }, [userdata, genre]);
 
   return (
     <div>
-    <p>devolviendo {genre}</p>
-    <MangaList manga={manga}/>
+      <p>Devolviendo {genre}</p>
+      <MangaList manga={manga} />
     </div>
-  )
-  
+  );
 }
 
 export default MangaFetcherGenre;

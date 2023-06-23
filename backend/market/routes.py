@@ -11,6 +11,70 @@ with app.app_context():
 app.app_context().push()
 
 
+
+@app.route('/signup', methods=[ 'POST'])
+def signup():
+    username = request.json.get("username")
+    email = request.json.get("email")
+    firstname = request.json.get("firstname")
+    lastname = request.json.get("lastname")
+    fechaNac = request.json.get("fechaNac")
+    pais = request.json.get("pais")
+    password = request.json.get("password")
+
+    user_exists = User.query.filter_by(email=email).first() is not None
+
+    if user_exists:
+        return jsonify({"error": "El correo electrónico ya está en uso"}), 409
+
+    new_user = User(username=username, email=email, firstname=firstname, lastname=lastname, fechaNac=fechaNac, pais=pais, password=password)
+    db.session.add(new_user)
+    db.session.commit()
+
+    session["user_id"] = new_user.id
+
+    return jsonify({
+        "id": new_user.id,
+        "email": new_user.email,
+        "firstname" : new_user.firstname,
+        "lastname" : new_user.lastname,
+        "fechaNac" : new_user.fechaNac,
+        "pais" : new_user.pais   
+    })
+
+
+
+@app.route("/login", methods=["POST"])
+def login_user():
+    email = request.json["email"]
+    password = request.json["password"]
+    
+    user = User.query.filter_by(email=email).first()
+  
+    if user is None:
+        return jsonify({"error": "Unauthorized Access"}), 401
+  
+    if not (password == user.password):
+        return jsonify({"error": "Unauthorized"}), 401
+      
+    session["user_id"] = user.id
+  
+    return jsonify({
+        "id": user.id,
+        "email": user.email,
+        "firstname" : user.firstname,
+        "lastname" : user.lastname,
+        "fechaNac" : user.fechaNac,
+        "pais" : user.pais   
+    })
+
+
+@app.route("/logout")
+def logout():
+    session.pop("user_id", None)
+    return jsonify({"message": "Sesión cerrada exitosamente"})
+
+
 @app.route('/users', methods=['GET', 'POST'])
 def route_users():
     if request.method == 'GET':
@@ -210,53 +274,9 @@ def route_compra_id(compra_id):
         db.session.delete(compra)
         db.session.commit()
         return 'SUCCESS'
-
-
-@app.route('/signup', methods=[ 'POST'])
-def signup():
-    username = request.json.get("username")
-    email = request.json.get("email")
-    firstname = request.json.get("firstname")
-    lastname = request.json.get("lastname")
-    fechaNac = request.json.get("fechaNac")
-    pais = request.json.get("pais")
-    password = request.json.get("password")
-
-    user_exists = User.query.filter_by(email=email).first() is not None
-
-    if user_exists:
-        return jsonify({"error": "El correo electrónico ya está en uso"}), 409
-
-    new_user = User(username=username, email=email, firstname=firstname, lastname=lastname, fechaNac=fechaNac, pais=pais, password=password)
-    db.session.add(new_user)
-    db.session.commit()
-
-    session["user_id"] = new_user.id
-
-    return jsonify({
-        "id": new_user.id,
-        "email": new_user.email
-    })
-
-
-
-@app.route("/login", methods=["POST"])
-def login_user():
-    email = request.json["email"]
-    password = request.json["password"]
     
-    user = User.query.filter_by(email=email).first()
-  
-    if user is None:
-        return jsonify({"error": "Unauthorized Access"}), 401
-  
-    if not (password == user.password):
-        return jsonify({"error": "Unauthorized"}), 401
-      
-    session["user_id"] = user.id
-  
-    return jsonify({
-        "id": user.id,
-        "email": user.email
-        
-    })
+
+
+
+
+

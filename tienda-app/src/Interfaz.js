@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
-import './styles.css'; // Import the CSS file
+import './styles.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MangaFetcherGenre from './DataComponents/MangaFetcherGenre';
 import MangaFetcherName from './DataComponents/MangaFetcherName';
 import Manga_fetch from './DataComponents/MangaFetcher';
 
-function Interfaz() {
+function Interfaz( {userdata} ) {
   const [selection, setSelection] = useState('');
   const [nombre, setNombre] = useState('');
+
   const handleChange = (e) => {
     setSelection(e.target.value);
   };
+
   const handleChangeName = (e) => {
     setNombre(e.target.value);
   };
+
   let content = null;
 
-  if (selection === 'General' ) {
-    content = <Manga_fetch />;
+  if (selection === 'General') {
+    content = <Manga_fetch userdata={userdata} />;
   } else if (selection) {
-    content = <MangaFetcherGenre genre={selection} />;
+    content = <MangaFetcherGenre userdata={userdata} genre={selection} />;
   } else if (nombre) {
-    content = <MangaFetcherName name={nombre} />;
+    content = <MangaFetcherName userdata={userdata} name={nombre} />;
   } else {
-    content = <Manga_fetch />;
+    content = <Manga_fetch userdata={userdata} />;
   }
   return (
     <>
