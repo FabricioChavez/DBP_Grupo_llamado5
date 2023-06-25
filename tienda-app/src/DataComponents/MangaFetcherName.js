@@ -5,7 +5,7 @@ function MangaFetcherName({ userdata , name}) {
   
   const [manga, setManga] = useState([]);
 
-  useEffect(() => {
+  const fetcherbyName = () =>{
     fetch(`http://127.0.0.1:5000/manga/byn/${name}`, {
       'methods': "GET",
       headers: {
@@ -15,6 +15,11 @@ function MangaFetcherName({ userdata , name}) {
       .then(resp => resp.json())
       .then(resp => setManga(resp))
       .catch(error => console.log(error));
+
+  }                          
+
+  useEffect(() => {
+   fetcherbyName()
   }, []);
 
   return (

@@ -1,101 +1,202 @@
-.p{
-    background-color: #A2B2EE;
+.p {
+  background-color: #a2b2ee;
 }
+
 .MangaInfo {
-    background-color: #262626;
-    position: absolute;
-     width: 100%;
-    height: 100%;
-  }
-  
+  background-color: #262626;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
 .Imagen {
-    position: absolute;
-    left: 15%;
-    top: 15%;
-    width: 30%;
-    height: 70%;
-    border: 3px solid #A2B2EE;
-    border-radius: 2%;
-    z-index: 1;
-  }
-  
-  .Texto {
-    position: absolute;
-    left: 60%;
-    bottom: 70%;
-    z-index: 1;
-    font-size: 2.6rem;
-    color: #A2B2EE;
-  }
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  width: 30%;
+  height: 70%;
+  border: 3px solid #a2b2ee;
+  border-radius: 2%;
+  z-index: 1;
+}
 
-  .Texto2{
-    position: absolute;
-    left: 60%;
-    bottom: 20%;
-    z-index: 1;
-    
-  }
+.Texto {
+  position: absolute;
+  left: 60%;
+  bottom: 70%;
+  z-index: 1;
+  font-size: 2.6rem;
+  color: #a2b2ee;
+}
 
-   
-  .Text3 {
-    position: absolute;
-    left: 60.1%;
-    bottom: 60%;
-    font-size: 2rem;
-    color:#a6a6a7; 
-    z-index: 1;
-  }
+.Texto2 {
+  position: absolute;
+  left: 60%;
+  bottom: 20%;
+  z-index: 1;
+}
 
-  .Texto4{
-    position: absolute;
-    left: 60.1%;
-    bottom: 40%;
-    font-size: 1.8rem;
-    z-index: 1;
-    color: #A2B2EE;
+.Text3 {
+  position: absolute;
+  left: 60.1%;
+  bottom: 60%;
+  font-size: 2rem;
+  color: #a6a6a7;
+  z-index: 1;
+}
 
-    
-  }
-   
- 
+.Texto4 {
+  position: absolute;
+  left: 60.1%;
+  bottom: 40%;
+  font-size: 1.8rem;
+  z-index: 1;
+  color: #a2b2ee;
+}
 
-  .Texto5{
-    position: absolute;
-    left: 60.1%;
-    bottom: 80%;
-    font-size: 1.3rem;
-    color:#a6a6a7; 
-    z-index: 1;
-    
-  }
+.Texto5 {
+  position: absolute;
+  left: 60.1%;
+  bottom: 80%;
+  font-size: 1.3rem;
+  color: #a6a6a7;
+  z-index: 1;
+}
 
-  .Texto6{
-    position: absolute;
-    left: 60.1%;
-    bottom: 60%;
-    font-size: 1.8rem;
-    color: #d4daf0;
-    z-index: 1;
-    
-  }
+.Texto6 {
+  position: absolute;
+  left: 60.1%;
+  bottom: 60%;
+  font-size: 1.8rem;
+  color: #d4daf0;
+  z-index: 1;
+}
 
-  .rectangulo {
-    position: absolute;
-    top:10%;
-    left: 5%;
-    width: 90%; 
-    height: 80%; 
-    z-index: 0;
-    background-color: #2e3239;
-  }
-  .rectangulo2 {
-    position: absolute;
-    top:10%;
-    left: 55%;
-    width: 40%; 
-    height: 80%; 
-    z-index: 0;
-    background-color: #4d515a;
-  }
-  
-  
+.rectangulo {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  width: 90%;
+  height: 80%;
+  z-index: 0;
+  background-color: #2e3239;
+}
+
+.rectangulo2 {
+  position: absolute;
+  top: 10%;
+  left: 55%;
+  width: 40%;
+  height: 80%;
+  z-index: 0;
+  background-color: #4d515a;
+}
+.rectangulo3 {
+  position: absolute;
+  width: 100%;
+  top: 95%;
+  height: auto;
+  background-color: #2e3239;
+  padding: 6rem;
+  margin-top: 2rem;
+  border-radius: 5px;
+}
+
+.comentar {
+  font-size: 1.8rem;
+  color: #a6a6a7;
+  margin-bottom: 1rem;
+}
+
+.Comentario {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  background-color: #4d515a;
+  color: #ffffff;
+}
+
+.Comentario:focus {
+  outline: none;
+}
+
+.Comentario::placeholder {
+  color: #a6a6a7;
+}
+
+.Botones {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Botones button {
+  font-size: 1.4rem;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #a2b2ee;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.Botones button:hover {
+  background-color: #7f8deb;
+}
+
+.AgregarComentario {
+  font-size: 1.4rem;
+  color: #a2b2ee;
+  cursor: pointer;
+}
+
+.AgregarComentario:hover {
+  text-decoration: underline;
+}
+.rectangulo4 {
+  position: absolute;
+  top: 120%;
+  left: 0%;
+  width: 100%;
+  height: 80%;
+  z-index: 0;
+  background-color: #232529;
+}
+.Box-comment-container {
+  position: relative;
+}
+
+
+
+.Box-comment-container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 50, 57, 0.7);
+  z-index: 0;
+  border-radius: 5px;
+}
+
+.Box-comment {
+  position: relative;
+  font-size: 1.3rem;
+  color: #ffffff;
+  z-index: 1;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #2e3239;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+.Box-comment:hover {
+  border: 3.5px solid rgba(255, 255, 255, 0.5);
+  transition: border-color 0.3s;
+}
+.Box-comment  p {
+  font-family: "Georgia", serif;
+}

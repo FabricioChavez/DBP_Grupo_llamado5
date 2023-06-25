@@ -8,23 +8,30 @@ import Manga_fetch from './DataComponents/MangaFetcher';
 function Interfaz( {userdata} ) {
   const [selection, setSelection] = useState('');
   const [nombre, setNombre] = useState('');
-
+  const [iscommneting , setIscommenting] = useState(false)
   const handleChange = (e) => {
     setSelection(e.target.value);
+   
   };
-
   const handleChangeName = (e) => {
     setNombre(e.target.value);
+    setIscommenting(false)
   };
+  const handleBuscar=()=>{
+      setIscommenting(true)
+  }
 
   let content = null;
+  
 
+  
   if (selection === 'General') {
     content = <Manga_fetch userdata={userdata} />;
   } else if (selection) {
     content = <MangaFetcherGenre userdata={userdata} genre={selection} />;
-  } else if (nombre) {
+  } else if (iscommneting) {
     content = <MangaFetcherName userdata={userdata} name={nombre} />;
+    
   } else {
     content = <Manga_fetch userdata={userdata} />;
   }
@@ -62,8 +69,11 @@ function Interfaz( {userdata} ) {
         <div className="Cuadro2">
           <div className="box">
             <div className="input">
+            
               <label htmlFor='nombres' style={{ fontFamily: 'Quicksand', fontSize: '20px' }}>Buscar por nombre:</label>
               <input type="text" id="Nombre" style={{ borderRadius: '15px' }}  value={nombre} onChange={handleChangeName}  />
+              <button className='btn btn-primary'value={iscommneting} onClick={handleBuscar}>Buscar</button>
+         
             </div>
           </div>
         </div>

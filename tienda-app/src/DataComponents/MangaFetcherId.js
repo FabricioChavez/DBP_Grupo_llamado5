@@ -1,16 +1,85 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import './MangaId.css';
+import Comment_client from "./CommentClient";
 
-function MangaFetcherId({ userdata, id }) {
+function MangaFetcherId(props) {
+  const Param = useParams();
+  const id = Param.id;
+  const { userData } = props;
+
+  const [storedUser, setStoredUser] = useState(() => {
+    const user = localStorage.getItem("userData");
+    return user ? JSON.parse(user) : userData;
+  });
+  const handleBeforeUnload = () => {
+    localStorage.setItem("userData", JSON.stringify(storedUser));
+  };
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [storedUser]);
+  console.log(storedUser);
+
   const [manga, setManga] = useState(null);
+  const [comment, setComment] = useState("");
+  const [isCommenting, setIsCommenting] = useState(false);
+  const [comments, setComments] = useState([]);
+
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  }
+
+  const handleCommentCancel = () => {
+    setComment("");
+    setIsCommenting(false);
+  }
+
+  const handleCommentSubmit = () => {
+    const newComment = {
+      contenido: comment,
+      user_id: storedUser.id,
+      manga_nombre: manga.nombre,
+      manga_edicion: manga.edicion
+    };
+
+    fetch("http://127.0.0.1:5000/comentario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newComment)
+    })
+      .then(response => response.text())
+      .then(data => {
+        console.log("Comentario enviado:", data);
+        setComment("");
+        setIsCommenting(false);
+        fetchComments();
+      })
+      .catch(error => console.log(error));
+  };
+
+  const fetchComments = () => {
+    fetch(`http://127.0.0.1:5000/comentario/by/${id}`)
+      .then(resp => resp.json())
+      .then(data => setComments(data))
+      .catch(error => console.log(error));
+  };
 
   useEffect(() => {
     fetch(`http://127.0.0.1:5000/manga/${id}`)
       .then(resp => resp.json())
       .then(data => setManga(data))
       .catch(error => console.log(error));
-  }, [userdata, id]);
+  }, [id]);
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
 
   if (!manga) {
     return <div>Cargando...</div>;
@@ -25,10 +94,42 @@ function MangaFetcherId({ userdata, id }) {
         <h2 className="Texto3">Edición: {manga.edicion}</h2>
         <h2 className="Texto4">Stock: {manga.cant_stock}</h2>
         <h2 className="Texto5"><em>Género: {manga.genero}</em></h2>
-        <h2 className="Texto6"> ${manga.precio}</h2>
+        <h2 className="Texto6">${manga.precio}</h2>
         <div className="rectangulo"></div>
         <div className="rectangulo2"></div>
-        <button className="btn btn-primary Texto2">Comprar</button>
+        <button className="btn btn-primary Texto2">Desea Comprar</button>
+      </div>
+      <div className="rectangulo3">
+        <h1 className="comentar">Caja de Comentarios</h1>
+        {isCommenting ? (
+          <div>
+            <input
+              className="Comentario"
+              type="text"
+              placeholder="Escriba su comentario aquí"
+              value={comment}
+              onChange={handleCommentChange}
+            />
+            <div className="Botones">
+              <button onClick={handleCommentSubmit}>Enviar</button>
+              <button onClick={handleCommentCancel}>Cancelar</button>
+            </div>
+          </div>
+        ) : (
+          <div className="AgregarComentario" onClick={() => setIsCommenting(true)}>
+            Agregar comentario
+          </div>
+        )}
+      </div>
+      <div className="rectangulo4">
+        <div className="Box-comment-container">
+          {comments.map(data => (
+            <div className="Box-comment" key={data.id}>
+              <Comment_client id={data.user_id} />
+              <p>{data.contenido}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

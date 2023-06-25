@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 
 const MangaListContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   grid-gap: 10px;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Ajustar al 100% del viewport */
 `;
 
 const MangaItem = styled.div`
@@ -52,7 +55,7 @@ const MangaName = styled.h2`
 `;
 
 function MangaList(props) {
-  const { manga , userdata} = props;
+  const { manga, userdata } = props;
   const [selectedMangaId, setSelectedMangaId] = useState(null);
 
   const handleMouseEnter = (manga) => {
@@ -67,19 +70,18 @@ function MangaList(props) {
     setSelectedMangaId(id);
   };
 
-  return (
-    <MangaListContainer>
-      {manga.map((manga, index) => (
+  const createMangaGrid = () => {
+    const rows = [];
+    let currentRow = [];
+
+    manga.forEach((manga) => {
+      currentRow.push(
         <MangaItem
           key={manga.id}
-          style={{
-            gridRow: index > 2 ? "2" : "1",
-            gridColumn: (index % 3) + 1,
-          }}
           onMouseEnter={() => handleMouseEnter(manga)}
           onMouseLeave={handleMouseLeave}
         >
-          <Link to={`/MasInfo` }>
+          <Link to={`/MasInfo/${manga.id}`}>
             <MangaImage
               src={manga.link}
               id={manga.id}
@@ -97,9 +99,30 @@ function MangaList(props) {
             {manga.nombre}
           </MangaName>
         </MangaItem>
-      ))}
-    </MangaListContainer>
-  );
+      );
+
+      if (currentRow.length === 3) {
+        rows.push(
+          <div key={rows.length} style={{ display: "flex" }}>
+            {currentRow}
+          </div>
+        );
+        currentRow = [];
+      }
+    });
+
+    if (currentRow.length > 0) {
+      rows.push(
+        <div key={rows.length} style={{ display: "flex" }}>
+          {currentRow}
+        </div>
+      );
+    }
+
+    return rows;
+  };
+
+  return <MangaListContainer>{createMangaGrid()}</MangaListContainer>;
 }
 
 export { MangaList };
