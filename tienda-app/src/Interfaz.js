@@ -33,7 +33,7 @@ function Interfaz({ userdata }) {
   }
   return (
     <>
-      <div className="background">
+      <div className='inter'>
         <nav className="navbar navbar-expand-lg " style={{ backgroundColor: '#2e3239' }}>
           <a className="navbar-brand" style={{ color: '#A2B2EE', fontFamily: 'Quicksand', backgroundColor: '#2e3239' }} href="Pagina principal">Página principal</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@ function Interfaz({ userdata }) {
           </div>
         </div>
 
-        <div style={{ marginTop: '10%' }}>
+        <div className='imagenes' style={{ marginTop: '10%' }}>
           {content}
         </div>
       </div>

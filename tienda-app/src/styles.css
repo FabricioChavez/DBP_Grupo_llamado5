@@ -1,38 +1,40 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-body{
+
+body {
   background-color: #26292B;
 }
-label{
-  color: #26292B;
-  background-color: #5F7ADB;
+.inter{
+  background-color: #26292B;
 }
-input{
-  background-color: white;
+.imagenes * {
+  background-color: #26292B;
 }
-option{
-  background-color: white;
+
+.background {
+  min-height: 100vh;
+  background-color: #26292B;
 }
-select{
-  background-color: white;
-}
-.Cuadro{
-  position:absolute;
+
+.Cuadro {
+  position: absolute;
   left: 30%;
   top: 25%;
   transform: translate(-100%, -100%);
 }
-.Cuadro2{
+
+.Cuadro2 {
   position: absolute;
   left: 80%;
   top: 25%;
   transform: translate(-100%, -100%);
 }
-.box{
+
+.box {
   min-width: 490px;
   background-color: #5F7ADB;
   border-radius: 20px;
@@ -41,28 +43,8 @@ select{
   padding: 20px;
   line-height: 2.2;
 }
-#image1{
-  position: absolute;
-  height: 25em;
-  bottom: 5em;
-  left: 10em;
-}
-#image2{
-  position: absolute;
-  height: 25em;
-  bottom: 5em;
-  left: 30em;
-}
-#image3{
-  position: absolute;
-  height: 25em;
-  bottom: 5em;
-  left: 50em;
-}
+
 .background {
   background-color: #26292B;
   height: 100vh;
-}
-*{
-  background-color: #26292B;
 }
