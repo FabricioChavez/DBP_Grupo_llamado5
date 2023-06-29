@@ -2,6 +2,10 @@
   background-color: #a2b2ee;
 }
 
+:root, [data-bs-theme=light]{
+  background-color: #262626;
+}
+
 .MangaInfo {
   background-color: #262626;
   position: absolute;
@@ -158,7 +162,7 @@
 }
 .rectangulo4 {
   position: absolute;
-  top: 120%;
+  top: 140%;
   left: 0%;
   width: 100%;
   height: 80%;
@@ -168,8 +172,6 @@
 .Box-comment-container {
   position: relative;
 }
-
-
 
 .Box-comment-container:before {
   content: "";
