@@ -25,8 +25,8 @@ const MangaItem = styled.div`
 `;
 
 const MangaImage = styled.img`
-  width: 300px;
-  height: 400px;
+  width: 445px;
+  height: 500px;
   object-fit: cover;
   border: 4px solid;
   animation: colorAnimation 3s infinite;

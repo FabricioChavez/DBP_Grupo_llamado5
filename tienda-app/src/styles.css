@@ -9,6 +9,16 @@ body{
 }
 label{
   color: #26292B;
+  background-color: #5F7ADB;
+}
+input{
+  background-color: white;
+}
+option{
+  background-color: white;
+}
+select{
+  background-color: white;
 }
 .Cuadro{
   position:absolute;
@@ -23,7 +33,7 @@ label{
   transform: translate(-100%, -100%);
 }
 .box{
-  min-width: 400px;
+  min-width: 490px;
   background-color: #5F7ADB;
   border-radius: 20px;
   text-align: center;
@@ -49,6 +59,10 @@ label{
   bottom: 5em;
   left: 50em;
 }
-.retipula{
+.background {
+  background-color: #26292B;
+  height: 100vh;
+}
+*{
   background-color: #26292B;
 }
