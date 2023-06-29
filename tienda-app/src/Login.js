@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import localStorage from 'localStorage';
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -21,6 +22,7 @@ function Login({ onLogin }) {
         .then(function (response) {
           console.log(response);
           const data = response.data
+          localStorage.setItem('userData', JSON.stringify(data));
           onLogin(data); 
           navigate('/interfaz');
         })

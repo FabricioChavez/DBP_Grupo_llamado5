@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
@@ -12,7 +12,15 @@ function App() {
 
   const handleLogin = (data) => {
     setUserData(data);
+    localStorage.setItem('userData', JSON.stringify(data));
   };
+
+  useEffect(() => {
+    const storedData = localStorage.getItem('userData');
+    if (storedData) {
+      setUserData(JSON.parse(storedData));
+    }
+  }, []);
 
   return (
     <div>

@@ -61,7 +61,8 @@ def login_user():
                 "firstname" : userCache[email]["firstname"],
                 "lastname" : userCache[email]["lastname"],
                 "fechaNac" : userCache[email]["fechaNac"],
-                "pais" : userCache[email]["pais"]
+                "pais" : userCache[email]["pais"],
+                "password" : userCache[email]["password"]
             }
     else:
         user = User.query.filter_by(email=email).first()
@@ -72,8 +73,9 @@ def login_user():
                 "email": user.email,
                 "firstname": user.firstname,
                 "lastname": user.lastname,
-                "fechaNac": user.fechaNac,
-                "pais": user.pais
+                "fechaNac": user.fechaNac,  
+                "pais": user.pais,
+                "password" : user.password
             }
 
         })
