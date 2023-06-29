@@ -76,6 +76,7 @@ function MangaList(props) {
 
     manga.forEach((manga) => {
       currentRow.push(
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
         <MangaItem
           key={manga.id}
           onMouseEnter={() => handleMouseEnter(manga)}
@@ -99,6 +100,7 @@ function MangaList(props) {
             {manga.nombre}
           </MangaName>
         </MangaItem>
+        </div>
       );
 
       if (currentRow.length === 3) {
