@@ -4,6 +4,9 @@ from flask import render_template, jsonify, request, redirect, url_for, flash, s
 from market.tables import User, Autor, Manga, Comentario, Compra
 from datetime import datetime
 
+userCache = {}
+
+
 with app.app_context():
     db.create_all()
 
@@ -34,6 +37,7 @@ def signup():
 
     return jsonify({
         "id": new_user.id,
+        "username" : new_user.username,
         "email": new_user.email,
         "firstname": new_user.firstname,
         "lastname": new_user.lastname,
@@ -47,18 +51,43 @@ def login_user():
     email = request.json["email"]
     password = request.json["password"]
 
-    user = User.query.filter_by(email=email).first()
+    global userCache
+
+    if(email in userCache.keys()):
+            user = { 
+                "id": userCache[email]["id"],
+                "username" : userCache[email]["username"],
+                "email" : userCache[email]["email"],
+                "firstname" : userCache[email]["firstname"],
+                "lastname" : userCache[email]["lastname"],
+                "fechaNac" : userCache[email]["fechaNac"],
+                "pais" : userCache[email]["pais"]
+            }
+    else:
+        user = User.query.filter_by(email=email).first()
+        userCache.update( {
+            email: {
+                "id": user.id,
+                "username" : user.username,
+                "email": user.email,
+                "firstname": user.firstname,
+                "lastname": user.lastname,
+                "fechaNac": user.fechaNac,
+                "pais": user.pais
+            }
+
+        })
 
     if user is None:
         return jsonify({"error": "Unauthorized Access"}), 401
 
     if not (password == user.password):
         return jsonify({"error": "Unauthorized"}), 401
-
-    session["user_id"] = user.id
-
+    
+    
     return jsonify({
         "id": user.id,
+        "username" : user.username,
         "email": user.email,
         "firstname": user.firstname,
         "lastname": user.lastname,
@@ -101,13 +130,19 @@ def route_user_id(users_id):
         current_user = User.query.get_or_404(users_id)
         fecha_nac_string = data['fechaNac']
         fecha_nac = datetime.strptime(fecha_nac_string, '%Y-%m-%d').date()
+
+        if current_user.email in userCache.keys():
+            del userCache[current_user.email] 
+
+
         current_user.username = data['username']
         current_user.email = data['email']
         current_user.firstname = data['firstname']
         current_user.lastname = data['lastname']
         current_user.fechaNac = fecha_nac
         current_user.pais = data['pais']
-        db.session.commit()
+        
+        db.session.commit()        
         return 'SUCCESS'
 
     elif request.method == 'DELETE':
@@ -151,9 +186,12 @@ def route_autor_id(autor_id):
 
 @app.route('/manga', methods=['GET', 'POST'])
 def route_manga():
+    
     if request.method == 'GET':
         mangas = Manga.query.all()
         return jsonify(mangas)
+    
+    
     elif request.method == 'POST':
         data = request.get_json()
         new_manga = Manga(nombre=data['nombre'], edicion=data['edicion'], cant_stock=data['cant_stock'],
@@ -178,6 +216,7 @@ def route_manga_by_name(name):
 
 @app.route('/manga/<manga_id>', methods=['GET', 'PUT', 'DELETE'])
 def route_manga_id(manga_id):
+    print(userCache)
     if request.method == 'GET':
         manga = Manga.query.get_or_404(manga_id)
         return jsonify(manga)
