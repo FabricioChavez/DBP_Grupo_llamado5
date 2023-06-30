@@ -30,11 +30,9 @@ def signup():
 
     new_user = User(username=username, email=email, firstname=firstname, lastname=lastname, fechaNac=fechaNac,
                     pais=pais, password=password)
-    db.session.add(new_user)
+    
     db.session.commit()
-
-    session["user_id"] = new_user.id
-
+    
     return jsonify({
         "id": new_user.id,
         "username" : new_user.username,
@@ -42,7 +40,8 @@ def signup():
         "firstname": new_user.firstname,
         "lastname": new_user.lastname,
         "fechaNac": new_user.fechaNac,
-        "pais": new_user.pais
+        "pais": new_user.pais,
+        "password" : new_user.password
     })
 
 
@@ -52,9 +51,10 @@ def login_user():
     password = request.json["password"]
 
     global userCache
-
+    
+    
     if(email in userCache.keys()):
-            user = { 
+        user = { 
                 "id": userCache[email]["id"],
                 "username" : userCache[email]["username"],
                 "email" : userCache[email]["email"],
@@ -63,45 +63,64 @@ def login_user():
                 "fechaNac" : userCache[email]["fechaNac"],
                 "pais" : userCache[email]["pais"],
                 "password" : userCache[email]["password"]
-            }
+        }
+
+        if user is None:
+            return jsonify({"error": "Unauthorized Access"}), 401
+
+        if not (password == user["password"]):
+            return jsonify({"error": "Unauthorized"}), 401
+        
+        return jsonify({
+            "id": user["id"],
+            "username" : user["username"],
+            "email": user["email"],
+            "firstname": user["firstname"],
+            "lastname": user["lastname"],
+            "fechaNac": user["fechaNac"],
+            "pais": user["pais"]
+        })
+        
+
     else:
         user = User.query.filter_by(email=email).first()
-        userCache.update( {
+
+        if user is None:
+            return jsonify({"error": "Unauthorized Access"}), 401
+
+        if not (password == user.password):
+            return jsonify({"error": "Unauthorized"}), 401
+
+        userCache.update({
             email: {
                 "id": user.id,
-                "username" : user.username,
+                "username": user.username,
                 "email": user.email,
                 "firstname": user.firstname,
                 "lastname": user.lastname,
-                "fechaNac": user.fechaNac,  
+                "fechaNac": user.fechaNac,
                 "pais": user.pais,
-                "password" : user.password
-            }
-
+            "password": user.password
+             }
         })
 
-    if user is None:
-        return jsonify({"error": "Unauthorized Access"}), 401
-
-    if not (password == user.password):
-        return jsonify({"error": "Unauthorized"}), 401
-    
-    
-    return jsonify({
-        "id": user.id,
-        "username" : user.username,
-        "email": user.email,
-        "firstname": user.firstname,
-        "lastname": user.lastname,
-        "fechaNac": user.fechaNac,
-        "pais": user.pais
-    })
+        return jsonify({
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "firstname": user.firstname,
+            "lastname": user.lastname,
+            "fechaNac": user.fechaNac,
+            "pais": user.pais
+        })
 
 
-@app.route("/logout")
-def logout():
-    session.pop("user_id", None)
-    return jsonify({"message": "Sesión cerrada exitosamente"})
+
+
+        
+
+
+
 
 
 @app.route('/users', methods=['GET', 'POST'])
@@ -123,6 +142,9 @@ def route_users():
 
 @app.route('/users/<users_id>', methods=['GET', 'PUT', 'DELETE'])
 def route_user_id(users_id):
+
+    global userCache
+
     if request.method == 'GET':
         user = User.query.get_or_404(users_id)
         return jsonify(user)

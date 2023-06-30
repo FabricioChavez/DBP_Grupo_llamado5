@@ -4,11 +4,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MangaFetcherGenre from './DataComponents/MangaFetcherGenre';
 import MangaFetcherName from './DataComponents/MangaFetcherName';
 import Manga_fetch from './DataComponents/MangaFetcher';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
 
 function Interfaz({ userdata }) {
   const [selection, setSelection] = useState('');
   const [nombre, setNombre] = useState('');
   const [iscommneting, setIscommenting] = useState(false);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setSelection(e.target.value);
   };
@@ -19,6 +23,11 @@ function Interfaz({ userdata }) {
   const handleBuscar = () => {
     setIscommenting(true);
   };
+
+  const handleLogout = () =>{
+      localStorage.removeItem('userData');
+      navigate('/login');
+  }
 
   let content = null;
 
@@ -47,6 +56,11 @@ function Interfaz({ userdata }) {
               </li>
             </ul>
           </div>
+
+          <Button variant="link" style={{ color: '#A2B2EE', fontFamily: 'Quicksand', backgroundColor: '#2e3239' }} onClick={handleLogout}>
+              Logout
+          </Button>
+
         </nav>
         <div className="Cuadro">
           <div className="box">
