@@ -19,7 +19,6 @@ function MangaFetcherGenre({ userdata, genre }) {
 
   return (
     <div>
-      <p>Devolviendo {genre}</p>
       <MangaList manga={manga} />
     </div>
   );

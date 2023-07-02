@@ -24,7 +24,6 @@ function MangaFetcherName({ userdata , name}) {
 
   return (
     <div>
-    <p>devolviendo {name}</p>
     <MangaList manga={manga}/>
     </div>
   )

@@ -1,33 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
+import { useNavigate, Link } from 'react-router-dom';
 import './styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MangaFetcherGenre from './DataComponents/MangaFetcherGenre';
 import MangaFetcherName from './DataComponents/MangaFetcherName';
 import Manga_fetch from './DataComponents/MangaFetcher';
-import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-
 
 function Interfaz({ userdata }) {
   const [selection, setSelection] = useState('');
   const [nombre, setNombre] = useState('');
-  const [iscommneting, setIscommenting] = useState(false);
+  const [iscommenting, setIsCommenting] = useState(false);
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setSelection(e.target.value);
-  };
-  const handleChangeName = (e) => {
-    setNombre(e.target.value);
-    setIscommenting(false);
-  };
-  const handleBuscar = () => {
-    setIscommenting(true);
+    setIsCommenting(false);
   };
 
-  const handleLogout = () =>{
-      localStorage.removeItem('userData');
-      navigate('/login');
-  }
+  const handleChangeName = (e) => {
+    setNombre(e.target.value);
+    setIsCommenting(false);
+  };
+
+  const handleBuscar = (e) => {
+    e.preventDefault();
+    setIsCommenting(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('userData');
+    navigate('/login');
+  };
 
   let content = null;
 
@@ -35,37 +39,27 @@ function Interfaz({ userdata }) {
     content = <Manga_fetch userdata={userdata} />;
   } else if (selection) {
     content = <MangaFetcherGenre userdata={userdata} genre={selection} />;
-  } else if (iscommneting) {
+  } else if (iscommenting) {
     content = <MangaFetcherName userdata={userdata} name={nombre} />;
   } else {
     content = <Manga_fetch userdata={userdata} />;
   }
+
   return (
     <>
-      <div className='inter'>
-        <nav className="navbar navbar-expand-lg " style={{ backgroundColor: '#2e3239' }}>
-          <a className="navbar-brand" style={{ color: '#A2B2EE', fontFamily: 'Quicksand', backgroundColor: '#2e3239' }} href="Pagina principal">Página principal</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <div className="collapse navbar-collapse" style={{backgroundColor: '#2e3239'}} id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item active">
-                <a className="nav-link" style={{ color: '#A2B2EE', fontFamily: 'Quicksand', backgroundColor:'#2e3239' }} href="buscar">Interfaz</a>
-              </li>
-            </ul>
-          </div>
-
-          <Button variant="link" style={{ color: '#A2B2EE', fontFamily: 'Quicksand', backgroundColor: '#2e3239' }} onClick={handleLogout}>
-              Logout
-          </Button>
-
-        </nav>
-        <div className="Cuadro">
-          <div className="box">
-            <label htmlFor="categorias" style={{ fontFamily: 'Quicksand', fontSize: '22px' }}>Seleccione por categoría:</label>
-            <select id="categorias" name="categorias" style={{ borderRadius: '15px' }} value={selection} onChange={handleChange}>
+      <div className="home">
+        <header>
+          <div className='titulo'>
+          <h1>
+            Tienda Mangas
+          </h1>
+        </div>
+          <div className="home__search-container">
+            <div className='homes'>
+              <button onClick={"tohome"}>Home</button>
+            </div>
+            <div className="box">
+            <select id="categorias" name="categorias" value={selection} onChange={handleChange}>
               <option value="">General</option>
               <option value="Seinen">Seinen</option>
               <option value="Shonen">Shonen</option>
@@ -73,23 +67,28 @@ function Interfaz({ userdata }) {
               <option value="Shoujo">Shoujo</option>
             </select>
           </div>
-        </div>
-
-
-        <div className="Cuadro2">
-          <div className="box">
-            <div className="input">
-              <div style={{ display: 'flex', alignItems: 'center' , backgroundColor: '#5F7ADB'}}>
-              <label htmlFor='nombres' style={{ fontFamily: 'Quicksand', fontSize: '20px' }}>Buscar por nombre:</label>
-                <input type="text" id="Nombre" style={{ borderRadius: '15px' }} value={nombre} onChange={handleChangeName} />
-                <button className='btn btn-primary' value={iscommneting} style={{ marginLeft: '10px' }} onClick={handleBuscar}>Buscar</button>
+            <form action="" className="search-form" onSubmit={handleBuscar}>
+              <div className="input-control">
+                <input
+                  type="text"
+                  id='Nombre'
+                  placeholder="Search Anime"
+                  value={nombre}
+                  onChange={handleChangeName}
+                />
+                <button type="submit" value={iscommenting} onClick={handleBuscar}>Search</button>
               </div>
+            </form>
+            <div className='perfil'>
+              <button onClick={"perfil"}>Profile</button>
+            </div>
+            <div className='logout'>
+              <button onClick={"logout"}>Logout</button>
             </div>
           </div>
-        </div>
-
-        <div className='imagenes' style={{ marginTop: '10%' }}>
-          {content}
+        </header>
+        <div className='imagenes'>
+        {content}
         </div>
       </div>
     </>

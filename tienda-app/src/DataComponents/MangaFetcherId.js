@@ -87,17 +87,24 @@ function MangaFetcherId(props) {
 
   return (
     <div>
-      <h1 className="p">Información de {manga.nombre}</h1>
+      <div className="titulo">
+        <h1 className="p" style={{backgroundColor: '#000'}}>Información de {manga.nombre}</h1>
+      </div>
       <div className="MangaInfo">
         <img className="Imagen" src={manga.link} alt={manga.nombre} />
-        <h2 className="Texto">Nombre: <strong>{manga.nombre}</strong></h2>
-        <h2 className="Texto3">Edición: {manga.edicion}</h2>
-        <h2 className="Texto4">Stock: {manga.cant_stock}</h2>
-        <h2 className="Texto5"><em>Género: {manga.genero}</em></h2>
-        <h2 className="Texto6">${manga.precio}</h2>
+        <h2 className="Texto_1"><em>Nombre:</em></h2>
+        <h2 className="Texto_2"><em>{manga.nombre}</em></h2>
+        <h2 className="Texto3_1"><em>Edición:</em></h2>
+        <h2 className="Texto3_2"><em>{manga.edicion}</em></h2>
+        <h2 className="Texto4_1"><em>Stock:</em></h2>
+        <h2 className="Texto4_2"><em>{manga.cant_stock}</em></h2>
+        <h2 className="Texto5_1"><em>Género:</em></h2>
+        <h2 className="Texto5_2"><em>{manga.genero}</em></h2>
+        <h2 className="Texto6_1"><em>Precio:</em></h2>
+        <h2 className="Texto6_2"><em>${manga.precio}</em></h2>
         <div className="rectangulo"></div>
         <div className="rectangulo2"></div>
-        <button className="btn btn-primary Texto2">Desea Comprar</button>
+        <button className="Texto2">Desea Comprar</button>
       </div>
       <div className="rectangulo3">
         <h1 className="comentar">Caja de Comentarios</h1>
@@ -120,8 +127,7 @@ function MangaFetcherId(props) {
             Agregar comentario
           </div>
         )}
-      </div>
-      <div className="rectangulo4">
+        
         <div className="Box-comment-container">
           {comments.map(data => (
             <div className="Box-comment" key={data.id}>

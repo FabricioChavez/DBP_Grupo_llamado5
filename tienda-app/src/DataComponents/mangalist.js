@@ -6,9 +6,9 @@ const MangaListContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
-  height: 100vh; /* Ajustar al 100% del viewport */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 `;
 
 const MangaItem = styled.div`

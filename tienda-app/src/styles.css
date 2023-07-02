@@ -1,50 +1,143 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+.home {
+  background: linear-gradient(to right, #b347ad 23%, #f0621b);
+  background-color: #000;
+  background: url("D:/Documentos/Rodrigo/Desarrollo/DBP_Grupo_llamado5/tienda-app/src/images/bg-image.jpeg");
+  background-size: contain;
 }
 
-body {
-  background-color: #26292B;
-}
-.inter{
-  background-color: #26292B;
-}
-.imagenes * {
-  background-color: #26292B;
+.home header {
+  padding: 2rem 5rem;
+  width: 60%;
+  height: 350px;
+  margin: 0 auto;
+  transition: all 0.4s ease-in-out;
 }
 
-.background {
-  min-height: 100vh;
-  background-color: #26292B;
+.home h1 {
+  cursor: pointer;
+  background: linear-gradient(to right, #f3f6f7 23%, #043862);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.4s ease-in-out;
+  font-size: 5rem;
+  text-align: center;
 }
 
-.Cuadro {
-  position: absolute;
-  left: 30%;
-  top: 25%;
-  transform: translate(-100%, -100%);
+.home__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
-.Cuadro2 {
-  position: absolute;
-  left: 80%;
-  top: 25%;
-  transform: translate(-100%, -100%);
+.home__search-container {
+  display: flex;
+  flex-direction: column; /* Alineación vertical */
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 12vh;
+  width: 100%;
+}
+
+.home__search-container > *:not(:last-child) {
+  margin-bottom: 1rem; /* Espacio vertical entre elementos */
+}
+
+
+.home__search-container button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  outline: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  font-family: inherit;
+  border: 5px solid #e5e7eb;
 }
 
 .box {
-  min-width: 490px;
-  background-color: #5F7ADB;
-  border-radius: 20px;
-  text-align: center;
-  position: relative;
-  padding: 20px;
-  line-height: 2.2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  outline: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  font-family: inherit;
+  border: 5px solid #e5e7eb;
 }
 
-.background {
-  background-color: #26292B;
-  height: 100vh;
+.home__search-container select{
+  position: relative;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  transition: all 0.4s ease-in-out;
+}
+.home__search-container select option {
+  background-color: #f2f2f2;
+  color: #333;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: none;
+}
+
+.home__search-container select option:hover {
+  background-color: #ddd;
+  color: #fff;
+}
+
+.home__search-container .input-control {
+  position: relative;
+  transition: all 0.4s ease-in-out;
+}
+
+.home__search-container input {
+  width: 90%;
+  padding: 0.7rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  background-color: #fff;
+  border: 5px solid #e5e7eb;
+  transition: all 0.4s ease-in-out;
+}
+
+.search-form{
+  width: 100%;
+}
+
+.home__search-container button[type="submit"] {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+button.log-in-btn {
+  background: linear-gradient(to right, #3a7bec 23%, #25c2e9);
+  color: #fff;
+}
+
+.log-in a {
+  text-decoration: none;
+}
+.imagenes{
+  margin-top: 25%;
+}
+.imagenes *{
+  background-color: #000;
 }
