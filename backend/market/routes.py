@@ -1,7 +1,8 @@
 from market import app
 from market import db
 from flask import render_template, jsonify, request, redirect, url_for, flash, session
-from market.tables import User, Autor, Manga, Comentario, Compra
+from market.tables import User, Autor, Manga, Comentario, Compra , User_pfp
+import base64
 from datetime import datetime
 
 userCache = {}
@@ -12,6 +13,43 @@ with app.app_context():
 
 app.app_context().push()
 
+@app.route('/upload/<user_id>', methods=['POST'])
+def upload(user_id):
+    file = request.files['image']
+
+    # Procesar el archivo y extraer información
+    file_data = file.read()
+    file_name = file.filename
+    file_size = len(file_data)
+
+    # Crear una nueva instancia de User_pfp
+    user_pfp = User_pfp(
+        name=file_name,
+        size=file_size,
+        data=file_data,
+        user_id=user_id  # ID del usuario asociado, debes proporcionar el ID correcto aquí
+    )
+    # Agregar la instancia a la sesión y realizar la inserción en la base de datos
+    db.session.add(user_pfp)
+    db.session.commit()
+
+    return 'SUCCESS'
+
+
+@app.route('/image/<user_id>', methods=['GET'])
+def get_image_data(user_id):
+    image_data = User_pfp.query.filter_by(user_id=user_id).first()
+    if image_data:
+        image_data_dict = {
+            'id': image_data.id,
+            'name': image_data.name,
+            'size': image_data.size,
+            'data': base64.b64encode(image_data.data).decode('utf-8'),
+            'user_id': image_data.user_id
+        }
+        return jsonify(image_data_dict)
+    else:
+        return jsonify(error='Image not found'), 404
 
 @app.route('/signup', methods=['POST'])
 def signup():

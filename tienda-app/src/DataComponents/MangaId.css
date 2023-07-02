@@ -257,3 +257,17 @@
 .Box-comment  p {
   font-family: "Georgia", serif;
 }
+.Box-comment {
+  display: flex;
+  align-items: center;
+}
+
+.image-wrapper {
+  margin-right: 20px;
+}
+
+.image {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+}

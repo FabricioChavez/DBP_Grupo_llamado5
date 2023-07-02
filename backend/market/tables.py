@@ -25,6 +25,7 @@ class User(db.Model):
     password = db.Column(db.String(80), nullable=False)
     comentarios = db.relationship('Comentario', backref='user_a', lazy=True)
     compras_user = db.relationship('Compra', backref='user_b', lazy=True)
+    profile_picture = db.relationship('User_pfp', backref='user_image', lazy=True)
 
     def __init__(self, username, email, firstname, lastname, fechaNac, pais, password):
         self.username = username
@@ -37,6 +38,19 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User {self.username}>'
+
+
+class User_pfp(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
+    size = db.Column(db.Integer)
+    data = db.Column(db.LargeBinary)
+    user_id= db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE") , nullable= False)
+
+    def __repr__(self):
+        return f"Image('{self.name}', '{self.size}', '{self.uploaded_at}')"
+
+
 
 
 @dataclass

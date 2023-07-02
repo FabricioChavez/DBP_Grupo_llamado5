@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import './MangaId.css';
 import Comment_client from "./CommentClient";
-
+import ImageGet from "./imageFetcher";
 function MangaFetcherId(props) {
   const Param = useParams();
   const id = Param.id;
@@ -131,8 +131,14 @@ function MangaFetcherId(props) {
         <div className="Box-comment-container">
           {comments.map(data => (
             <div className="Box-comment" key={data.id}>
+
+              <div className="image-wrapper">
+               <ImageGet id={data.user_id}/>
+               </div>
+              
+               <p>
               <Comment_client id={data.user_id} />
-              <p>{data.contenido}</p>
+                {data.contenido}</p>
             </div>
           ))}
         </div>

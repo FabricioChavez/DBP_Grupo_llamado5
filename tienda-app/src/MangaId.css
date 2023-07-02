@@ -98,5 +98,18 @@
     z-index: 0;
     background-color: #4d515a;
   }
+  .image-wrapper {
+    margin-right: 10px;
+  }
+  
+  .image {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+  }
+  
+  .comment-content {
+    flex-grow: 2;
+  }
   
   
