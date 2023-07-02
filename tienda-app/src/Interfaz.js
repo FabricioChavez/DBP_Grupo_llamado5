@@ -49,7 +49,7 @@ function Interfaz({ userdata }) {
     <>
       <div className="home">
         <header>
-          <div className='titulo'>
+          <div>
           <h1>
             Tienda Mangas
           </h1>
