@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_migrate import Migrate
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -11,11 +11,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'my_secret_key'
 
-
 app.config['SESSION_TYPE'] = 'filesystem'
 
-
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
 
 @app.after_request
 def after_request(response):
@@ -24,5 +24,5 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     return response
 
-from market import routes
 
+from market import routes

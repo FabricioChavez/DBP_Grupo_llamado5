@@ -1,7 +1,7 @@
 .home {
-  background: linear-gradient(to right, #b347ad 23%, #f0621b);
+  background: linear-gradient(to right, #b347ad 23%, #9b5431);
   background-color: #000;
-  background: url("./images/bg-image.jpeg");
+  background: url("./images/banner.jpg");
   background-size: contain;
 }
 
@@ -15,7 +15,8 @@
 
 .home h1 {
   cursor: pointer;
-  background: linear-gradient(to right, #f3f6f7 23%, #043862);
+  background: linear-gradient(to right, #e72cf8 23%, #f0edf0);
+  text-shadow: 0 0 2px rgba(233, 212, 235, 0.7), 0 0 5px rgba(230, 26, 255, 0.7), 0 0 10px rgba(230, 26, 255, 0.7), 0 0 15px rgba(230, 26, 255, 0.7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: all 0.4s ease-in-out;
@@ -62,6 +63,7 @@
 }
 
 .box {
+  
   display: flex;
   flex-direction: row;
   align-items: center;

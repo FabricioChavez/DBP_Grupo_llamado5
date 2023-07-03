@@ -3,31 +3,27 @@ import { useParams } from "react-router-dom";
 import './MangaId.css';
 import Comment_client from "./CommentClient";
 import ImageGet from "./imageFetcher";
+import Modal from "./Modal";
 function MangaFetcherId(props) {
   const Param = useParams();
   const id = Param.id;
   const { userData } = props;
+  
 
-  const [storedUser, setStoredUser] = useState(() => {
-    const user = localStorage.getItem("userData");
-    return user ? JSON.parse(user) : userData;
-  });
-  const handleBeforeUnload = () => {
-    localStorage.setItem("userData", JSON.stringify(storedUser));
-  };
 
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [storedUser]);
-  console.log(storedUser);
 
   const [manga, setManga] = useState(null);
   const [comment, setComment] = useState("");
   const [isCommenting, setIsCommenting] = useState(false);
   const [comments, setComments] = useState([]);
+  const [popup , setPpopup] = useState(false);
+
+  const handlePopup =  () =>{
+    setPpopup(true)
+    console.log(popup);
+    
+  }
+
 
   const handleCommentChange = (e) => {
     setComment(e.target.value);
@@ -41,10 +37,13 @@ function MangaFetcherId(props) {
   const handleCommentSubmit = () => {
     const newComment = {
       contenido: comment,
-      user_id: storedUser.id,
+      user_id: userData.id,
       manga_nombre: manga.nombre,
       manga_edicion: manga.edicion
     };
+
+
+ 
 
     fetch("http://127.0.0.1:5000/comentario", {
       method: "POST",
@@ -84,7 +83,13 @@ function MangaFetcherId(props) {
   if (!manga) {
     return <div>Cargando...</div>;
   }
-
+  let content = null;
+  if (popup) {
+    content = <Modal userData={userData} handleClose={()=>setPpopup(false)} manga={manga} />;
+  } else {
+    content = null;
+  }
+  
   return (
     <div>
       <div className="titulo">
@@ -104,7 +109,8 @@ function MangaFetcherId(props) {
         <h2 className="Texto6_2"><em>${manga.precio}</em></h2>
         <div className="rectangulo"></div>
         <div className="rectangulo2"></div>
-        <button className="Texto2">Desea Comprar</button>
+        <button className="Texto2" value={popup} onClick={handlePopup} >Desea Comprar</button>
+        {content}
       </div>
       <div className="rectangulo3">
         <h1 className="comentar">Caja de Comentarios</h1>

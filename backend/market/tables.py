@@ -23,11 +23,12 @@ class User(db.Model):
     fechaNac = db.Column(db.String(10), nullable=False)
     pais = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(80), nullable=False)
+    wallet = db.Column(db.Float)
     comentarios = db.relationship('Comentario', backref='user_a', lazy=True)
     compras_user = db.relationship('Compra', backref='user_b', lazy=True)
     profile_picture = db.relationship('User_pfp', backref='user_image', lazy=True)
 
-    def __init__(self, username, email, firstname, lastname, fechaNac, pais, password):
+    def __init__(self, username, email, firstname, lastname, fechaNac, pais, password , wallet):
         self.username = username
         self.email = email
         self.firstname = firstname
@@ -35,6 +36,7 @@ class User(db.Model):
         self.fechaNac = fechaNac
         self.pais = pais
         self.password = password
+        self.wallet= wallet
 
     def __repr__(self):
         return f'<User {self.username}>'

@@ -1,17 +1,17 @@
 from market import app
 from market import db
 from flask import render_template, jsonify, request, redirect, url_for, flash, session
-from market.tables import User, Autor, Manga, Comentario, Compra , User_pfp
+from market.tables import User, Autor, Manga, Comentario, Compra, User_pfp
 import base64
 from datetime import datetime
 
 userCache = {}
 
-
 with app.app_context():
     db.create_all()
 
 app.app_context().push()
+
 
 @app.route('/upload/<user_id>', methods=['POST'])
 def upload(user_id):
@@ -51,6 +51,7 @@ def get_image_data(user_id):
     else:
         return jsonify(error='Image not found'), 404
 
+
 @app.route('/signup', methods=['POST'])
 def signup():
     username = request.json.get("username")
@@ -68,18 +69,18 @@ def signup():
 
     new_user = User(username=username, email=email, firstname=firstname, lastname=lastname, fechaNac=fechaNac,
                     pais=pais, password=password)
-    
+
     db.session.commit()
-    
+
     return jsonify({
         "id": new_user.id,
-        "username" : new_user.username,
+        "username": new_user.username,
         "email": new_user.email,
         "firstname": new_user.firstname,
         "lastname": new_user.lastname,
         "fechaNac": new_user.fechaNac,
         "pais": new_user.pais,
-        "password" : new_user.password
+        "password": new_user.password
     })
 
 
@@ -89,18 +90,18 @@ def login_user():
     password = request.json["password"]
 
     global userCache
-    
-    
-    if(email in userCache.keys()):
-        user = { 
-                "id": userCache[email]["id"],
-                "username" : userCache[email]["username"],
-                "email" : userCache[email]["email"],
-                "firstname" : userCache[email]["firstname"],
-                "lastname" : userCache[email]["lastname"],
-                "fechaNac" : userCache[email]["fechaNac"],
-                "pais" : userCache[email]["pais"],
-                "password" : userCache[email]["password"]
+
+    if (email in userCache.keys()):
+        user = {
+            "id": userCache[email]["id"],
+            "username": userCache[email]["username"],
+            "email": userCache[email]["email"],
+            "firstname": userCache[email]["firstname"],
+            "lastname": userCache[email]["lastname"],
+            "fechaNac": userCache[email]["fechaNac"],
+            "pais": userCache[email]["pais"],
+            "password": userCache[email]["password"],
+            "wallet": userCache[email]["wallet"]
         }
 
         if user is None:
@@ -108,17 +109,18 @@ def login_user():
 
         if not (password == user["password"]):
             return jsonify({"error": "Unauthorized"}), 401
-        
+
         return jsonify({
             "id": user["id"],
-            "username" : user["username"],
+            "username": user["username"],
             "email": user["email"],
             "firstname": user["firstname"],
             "lastname": user["lastname"],
             "fechaNac": user["fechaNac"],
-            "pais": user["pais"]
+            "pais": user["pais"],
+            "wallet": user["wallet"]
         })
-        
+
 
     else:
         user = User.query.filter_by(email=email).first()
@@ -138,8 +140,9 @@ def login_user():
                 "lastname": user.lastname,
                 "fechaNac": user.fechaNac,
                 "pais": user.pais,
-            "password": user.password
-             }
+                "password": user.password,
+                "wallet": user.wallet
+            }
         })
 
         return jsonify({
@@ -149,16 +152,9 @@ def login_user():
             "firstname": user.firstname,
             "lastname": user.lastname,
             "fechaNac": user.fechaNac,
-            "pais": user.pais
+            "pais": user.pais,
+            "wallet": user.wallet
         })
-
-
-
-
-        
-
-
-
 
 
 @app.route('/users', methods=['GET', 'POST'])
@@ -180,7 +176,6 @@ def route_users():
 
 @app.route('/users/<users_id>', methods=['GET', 'PUT', 'DELETE'])
 def route_user_id(users_id):
-
     global userCache
 
     if request.method == 'GET':
@@ -194,8 +189,7 @@ def route_user_id(users_id):
         fecha_nac = datetime.strptime(fecha_nac_string, '%Y-%m-%d').date()
 
         if current_user.email in userCache.keys():
-            del userCache[current_user.email] 
-
+            del userCache[current_user.email]
 
         current_user.username = data['username']
         current_user.email = data['email']
@@ -203,9 +197,11 @@ def route_user_id(users_id):
         current_user.lastname = data['lastname']
         current_user.fechaNac = fecha_nac
         current_user.pais = data['pais']
-        
-        db.session.commit()        
-        return 'SUCCESS'
+        current_user.wallet = data['wallet']
+
+        db.session.commit()
+        user=User.query.get_or_404(users_id)
+        return jsonify(user)
 
     elif request.method == 'DELETE':
         user = User.query.get_or_404(users_id)
@@ -248,12 +244,11 @@ def route_autor_id(autor_id):
 
 @app.route('/manga', methods=['GET', 'POST'])
 def route_manga():
-    
     if request.method == 'GET':
         mangas = Manga.query.all()
         return jsonify(mangas)
-    
-    
+
+
     elif request.method == 'POST':
         data = request.get_json()
         new_manga = Manga(nombre=data['nombre'], edicion=data['edicion'], cant_stock=data['cant_stock'],
