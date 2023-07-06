@@ -2,6 +2,7 @@ from market import app
 from market import db
 from flask import render_template, jsonify, request, redirect, url_for, flash, session
 from market.tables import User, Autor, Manga, Comentario, Compra, User_pfp
+import bcrypt
 import base64
 from datetime import datetime
 

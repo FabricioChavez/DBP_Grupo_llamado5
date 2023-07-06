@@ -125,13 +125,13 @@ const Modal = ({ userData, handleClose, manga }) => {
               </div>
             </div>
 
-            <h3 className="F">Escoge tu modo de pago, por favor:</h3>
+            <div className="F"><h3>Escoge tu modo de pago, por favor:</h3></div>
             <select id="right-section" name="categorias" className="cyberpunk-select">
               <option value="">Modo de pago</option>
               <option value="tarjeta">Tarjeta de crédito</option>
               <option value="cash">Monedero virtual</option>
             </select>
-            <div className="BO">
+            <div className="cyber-botones-wrapper">
               <button class="cybr-btn" onClick={handleCompra}>
                 Comprar<span aria-hidden>_</span>
                 <span aria-hidden class="cybr-btn__glitch">Comprar_</span>

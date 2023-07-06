@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ app.secret_key = 'my_secret_key'
 app.config['SESSION_TYPE'] = 'filesystem'
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+
 
 
 @app.after_request

@@ -1,6 +1,6 @@
 .modal-overlay {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -11,14 +11,19 @@
   z-index: 999;
 }
 
+
+.cyber-botones-wrapper{
+  
+}
+
 .modal-content {
   font-family: 'Cyber', sans-serif;
   font-size: 1.3rem;
   background-color: rgba(123, 57, 157, 0.25); /* Color de fondo verde neón con transparencia */
   color: #ec96ec; /* Color rosa neón */
-  width: 120%;
-  max-width: 1100px;
-  max-height: 900px;
+  width: 100%;
+  max-width: 60%;
+  max-height: 100%;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(244, 243, 244, 0.3);
@@ -40,34 +45,48 @@
 
 .modal-body {
   display: flex;
+  height: 80%;
   align-items: flex-start;
 }
 
+.left-section {
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .left-section img {
-  max-width: 1000px;
-  max-height: 800px;
+  display: block;
+  max-width: 80%;
+  max-height: 600px;
   border-radius: 5%;
   object-fit: contain;
 }
 
 .right-section {
   position: inherit;
-  top: 10%;
-  margin-left: 50px;
-  max-width: 120%;
+  top: 0%;
+  /* margin-left: 50px; */
+  padding: 0 20px;
+  max-width: 70%;
   flex: 1;
 }
 
 .right-section h3 {
   margin: 0 0 10px;
   font-family: 'Cyber', sans-serif;
-  font-size:1.6rem;
+  font-size:1.0rem;
   color: #edc9f1; /* Cambiado a color morado neón estilo ciberpunk */
   text-shadow: 0 0 2px rgba(230, 26, 255, 0.7), 0 0 5px rgba(230, 26, 255, 0.7), 0 0 10px rgba(230, 26, 255, 0.7), 0 0 15px rgba(230, 26, 255, 0.7); /* Efecto de brillo neón con bordes definidos */
 }
 
-.F{
-  margin-top: 1em;
+.F {
+  margin: 0 20%;
+}
+
+.F h3{
+  margin-top: 0em;
+  font-size: 1em !important;
 }
 
 /* Agrega aquí los estilos para los elementos de la interfaz de compra */
@@ -137,7 +156,7 @@ body .cybr-btn + .cybr-btn {
   --primary-lightness: 50;
   --color: hsl(0, 20%, 99%);
 
-  --font-size: 26px;
+  --font-size: 15px;
   --shadow-primary-hue: 180;
   --label-size: 9px;
   --shadow-secondary-hue: 60;
@@ -152,6 +171,7 @@ body .cybr-btn + .cybr-btn {
   --clip-five: polygon(0 0, 100% 0, 100% 0, 95% 0, 95% 0, 85% 0, 85% 0, 8% 0, 0 0);
   --clip-six: polygon(0 40%, 100% 40%, 100% 85%, 95% 85%, 95% 85%, 85% 85%, 85% 85%, 8% 85%, 0 70%);
   --clip-seven: polygon(0 63%, 100% 63%, 100% 80%, 95% 80%, 95% 80%, 85% 80%, 85% 80%, 8% 80%, 0 70%);
+
   font-family: 'Cyber', sans-serif;
   color: var(--color);
   cursor: pointer;
@@ -163,11 +183,13 @@ body .cybr-btn + .cybr-btn {
   position: relative;
   font-weight: 700;
   border: 1px solid transparent;
-  min-width: 300px;
+  min-width: 200px;
   height: 75px;
   line-height: 75px;
-  margin-top: 15%;
-  margin-left: 15%;
+  /* margin-top: 15%;
+  margin-left: 15%; */
+  margin: 0 10px;
+
   transition: background 0.2s;
 }
 
@@ -239,6 +261,8 @@ body .cybr-btn + .cybr-btn {
   background: var(--primary);
   z-index: -1;
 }
+
+
 
 @keyframes glitch {
   0% {
