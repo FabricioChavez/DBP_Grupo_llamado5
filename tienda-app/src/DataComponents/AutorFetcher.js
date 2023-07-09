@@ -1,11 +1,10 @@
-
 import React from "react"
 import AutorList from "./AutorList";
 import { useState , useEffect } from "react";
 function Autor_fetch(){
 
     const [data ,setdata]=useState([])
-
+    
     useEffect(()=>{
         fetch('http://127.0.0.1:5000/autor',
         {'methods':'GET',

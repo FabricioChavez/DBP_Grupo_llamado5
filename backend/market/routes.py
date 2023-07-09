@@ -111,6 +111,7 @@ def login_user():
         if not (password == user["password"]):
             return jsonify({"error": "Unauthorized"}), 401
 
+        print(userCache)
         return jsonify({
             "id": user["id"],
             "username": user["username"],
@@ -145,7 +146,7 @@ def login_user():
                 "wallet": user.wallet
             }
         })
-
+        print(userCache)
         return jsonify({
             "id": user.id,
             "username": user.username,
@@ -211,6 +212,11 @@ def route_user_id(users_id):
         return 'SUCCESS'
 
 
+
+
+
+
+
 @app.route('/autor', methods=['GET', 'POST'])
 def route_autor():
     if request.method == 'GET':
@@ -274,7 +280,7 @@ def route_manga_by_name(name):
 
 @app.route('/manga/<manga_id>', methods=['GET', 'PUT', 'DELETE'])
 def route_manga_id(manga_id):
-    print(userCache)
+
     if request.method == 'GET':
         manga = Manga.query.get_or_404(manga_id)
         return jsonify(manga)

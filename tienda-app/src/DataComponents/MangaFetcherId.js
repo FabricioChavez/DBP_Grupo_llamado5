@@ -9,9 +9,6 @@ function MangaFetcherId(props) {
   const id = Param.id;
   const { userData } = props;
   
-
-
-
   const [manga, setManga] = useState(null);
   const [comment, setComment] = useState("");
   const [isCommenting, setIsCommenting] = useState(false);
@@ -42,8 +39,6 @@ function MangaFetcherId(props) {
       manga_edicion: manga.edicion
     };
 
-
- 
 
     fetch("http://127.0.0.1:5000/comentario", {
       method: "POST",

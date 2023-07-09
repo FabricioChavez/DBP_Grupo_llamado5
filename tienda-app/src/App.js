@@ -6,6 +6,8 @@ import Main from './Main';
 import Interfaz from './Interfaz';
 import MangaFetcherId from './DataComponents/MangaFetcherId';
 import Comment_client from './DataComponents/CommentClient';
+import Profile from './DataComponents/Perfil';
+import EditUsuario from './DataComponents/EditUsuario';
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -32,7 +34,9 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/interfaz" element={<Interfaz userdata={userData} />} />
           <Route path="/prueba/:id" element={<Comment_client  />} />
-        </Routes>
+          <Route path = "/Profile" element = {<Profile userData = {userData}/>}></Route>
+          <Route path = "/Edit" element = {<EditUsuario userData = {userData}    />}>  </Route>
+        </Routes >
       </Router>
     </div>
   );

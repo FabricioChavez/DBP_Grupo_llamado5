@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 
-function UploadImage() {
-  const { id } = useParams();
+function UploadImage(props) {
+  const { id } = props
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {

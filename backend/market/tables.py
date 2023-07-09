@@ -15,6 +15,9 @@ class User(db.Model):
     fechaNac: str
     pais: str
     password: str
+    wallet : float
+
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -47,7 +50,7 @@ class User_pfp(db.Model):
     name = db.Column(db.String(128))
     size = db.Column(db.Integer)
     data = db.Column(db.LargeBinary)
-    user_id= db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE") , nullable= False)
+    user_id= db.Column(db.Integer , db.ForeignKey('user.id', ondelete="CASCADE") , nullable= False )
 
     def __repr__(self):
         return f"Image('{self.name}', '{self.size}', '{self.uploaded_at}')"

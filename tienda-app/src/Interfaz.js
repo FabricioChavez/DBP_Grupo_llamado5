@@ -33,6 +33,10 @@ function Interfaz({ userdata }) {
     navigate('/login');
   };
 
+  const handleProfile = () => {
+      navigate('/Profile')
+  }
+
   let content = null;
 
   if (selection === 'General') {
@@ -80,10 +84,11 @@ function Interfaz({ userdata }) {
               </div>
             </form>
             <div className='perfil'>
-              <button onClick={"perfil"}>Profile</button>
+              <button onClick={handleProfile}>Profile</button>
             </div>
+
             <div className='logout'>
-              <button onClick={"logout"}>Logout</button>
+              <button onClick={handleLogout}>Logout</button>
             </div>
           </div>
         </header>
