@@ -55,7 +55,8 @@ const EditUsuario = (props) => {
         };
 
         localStorage.setItem('userData', JSON.stringify(updatedData));
-        window.location.reload();
+        /*window.location.reload();*/
+        navigate('/Profile')
       })
       .catch((error) => {
         console.error('Error al guardar los cambios:', error);

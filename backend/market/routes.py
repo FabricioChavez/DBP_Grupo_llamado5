@@ -2,7 +2,6 @@ from market import app
 from market import db
 from flask import render_template, jsonify, request, redirect, url_for, flash, session
 from market.tables import User, Autor, Manga, Comentario, Compra, User_pfp
-import bcrypt
 import base64
 from datetime import datetime
 
@@ -16,25 +15,27 @@ app.app_context().push()
 
 @app.route('/upload/<user_id>', methods=['POST'])
 def upload(user_id):
-    file = request.files['image']
+    if request.method == 'POST':
+        file = request.files['image']
 
-    # Procesar el archivo y extraer información
-    file_data = file.read()
-    file_name = file.filename
-    file_size = len(file_data)
+        # Procesar el archivo y extraer información
+        file_data = file.read()
+        file_name = file.filename
+        file_size = len(file_data)
 
-    # Crear una nueva instancia de User_pfp
-    user_pfp = User_pfp(
-        name=file_name,
-        size=file_size,
-        data=file_data,
-        user_id=user_id  # ID del usuario asociado, debes proporcionar el ID correcto aquí
-    )
-    # Agregar la instancia a la sesión y realizar la inserción en la base de datos
-    db.session.add(user_pfp)
-    db.session.commit()
+        # Crear una nueva instancia de User_pfp
+        user_pfp = User_pfp(
+            name=file_name,
+            size=file_size,
+            data=file_data,
+            user_id=user_id  # ID del usuario asociado, debes proporcionar el ID correcto aquí
+        )
+        # Agregar la instancia a la sesión y realizar la inserción en la base de datos
+        db.session.add(user_pfp)
+        db.session.commit()
 
-    return 'SUCCESS'
+        return 'SUCCESS'
+
 
 
 @app.route('/image/<user_id>', methods=['GET'])
@@ -212,11 +213,6 @@ def route_user_id(users_id):
         return 'SUCCESS'
 
 
-
-
-
-
-
 @app.route('/autor', methods=['GET', 'POST'])
 def route_autor():
     if request.method == 'GET':
@@ -386,3 +382,12 @@ def route_compra_id(compra_id):
         db.session.delete(compra)
         db.session.commit()
         return 'SUCCESS'
+
+@app.route('/compraUser/<user_id>', methods= ["GET"])
+def get_compras_by_user_id(user_id):
+    if request.method == 'GET':
+        compras = Compra.query.filter_by(id_user = user_id).all()
+        return jsonify(compras)
+
+
+
