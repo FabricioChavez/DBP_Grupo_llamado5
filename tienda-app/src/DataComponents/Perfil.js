@@ -1,39 +1,35 @@
-import React , {useState} from "react";
-import { useNavigate , Link } from "react-router-dom";
+import React from "react";
+import { useNavigate, Link } from "react-router-dom";
 
-function Profile( props){
-    const  {userData} = props;
-    const navigate = useNavigate();
+const Profile = (props) => {
+  const { userData } = props;
+  const navigate = useNavigate();
 
-    if(!userData){
-        return <div>Loading ....</div>
-    }
+  if (!userData) {
+    return <div>Loading ....</div>;
+  }
 
-    return(
-        <div>
-            <div> 
-                <h1>
-                     Username : {userData.username}
+  return (
+    <div className="container">
+      <div className="my-4">
+        <h1>Username: {userData.username}</h1>
+      </div>
 
-                </h1>            
-            </div>
+      <div className="my-4">
+        <h2>Nombre: {userData.firstname}</h2>
+        <h2>Apellido: {userData.lastname}</h2>
+        <h2>País: {userData.pais}</h2>
+        <h2>Saldo: {userData.wallet}</h2>
+      </div>
 
-            <div>
-                <h2> Nombre : {userData.firstname} </h2>
-                <h2> Apellido : {userData.lastname} </h2>
-                <h2> Pais : {userData.pais} </h2>
-                <h2> Saldo : {userData.wallet} </h2>
-            </div>
+      <div className="my-4">
+        <Link to="/Edit" className="btn btn-primary mr-2">Editar</Link>
+        <Link to="/interfaz" className="btn btn-secondary">Volver</Link>
+      </div>
+    </div>
+  );
+};
 
-        
-            <Link to = "/Edit"> Editar </Link>
-
-            <Link to = "/interfaz"> Volver </Link>
-        </div>
-
-        
-    )
-}
 
 
 export default Profile

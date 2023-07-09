@@ -51,7 +51,6 @@ class User_pfp(db.Model):
     size = db.Column(db.Integer)
     data = db.Column(db.LargeBinary)
     user_id= db.Column(db.Integer , db.ForeignKey('user.id', ondelete="CASCADE") , nullable= False )
-
     def __repr__(self):
         return f"Image('{self.name}', '{self.size}', '{self.uploaded_at}')"
 

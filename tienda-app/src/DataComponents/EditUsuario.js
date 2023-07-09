@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import UploadImage from './ImageUpload';
 
-function EditUsuario(props) {
+const EditUsuario = (props) => {
   const { userData } = props;
-   
-  
+
   const navigate = useNavigate();
 
   const [username, setUsername] = useState(userData ? userData.username : '');
@@ -16,101 +15,94 @@ function EditUsuario(props) {
   const [pais, setPais] = useState(userData ? userData.pais : '');
   const [wallet, setWallet] = useState(userData ? userData.wallet : '');
   const [id, setId] = useState(userData ? userData.id : '');
-  
-   const handleSubmit = (e) => {
-        e.preventDefault();
 
-        let updatedData = {
-            username,
-            email,
-            firstname,
-            lastname,
-            fechaNac,
-            pais,
-            wallet
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let updatedData = {
+      username,
+      email,
+      firstname,
+      lastname,
+      fechaNac,
+      pais,
+      wallet
+    };
+
+    update(updatedData);
+
+    console.log(username);
+  };
+
+  const update = (updatedData) => {
+    fetch(`http://127.0.0.1:5000/users/${userData.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedData),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(() => {
+        updatedData = {
+          username,
+          email,
+          firstname,
+          lastname,
+          fechaNac,
+          pais,
+          wallet,
+          id
         };
 
-        update(updatedData);
-
-       console.log(username);
-
-  
-   };
-
-    const update = (updatedData) => {
-        fetch(`http://127.0.0.1:5000/users/${userData.id}`, {
-            method: 'PUT',
-            body: JSON.stringify(updatedData),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then(() => {
-              updatedData = {
-                  username,
-                  email,
-                  firstname,
-                  lastname,
-                  fechaNac,
-                  pais,
-                  wallet,
-                  id
-              }
-      
-              localStorage.setItem('userData', JSON.stringify(updatedData));
-              window.location.reload();
-            })
-            .catch(error => {
-              console.error('Error al guardar los cambios:', error);
-          });
-
-
-    }
+        localStorage.setItem('userData', JSON.stringify(updatedData));
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error('Error al guardar los cambios:', error);
+      });
+  };
 
   return (
-    <div>
+    <div className="container">
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-group">
           <label>Username:</label>
-          <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+          <input type="text" className="form-control" value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Email:</label>
-          <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
+          <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Nombre:</label>
-          <input type="text" value={firstname} onChange={e => setFirstname(e.target.value)} />
+          <input type="text" className="form-control" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Apellido:</label>
-          <input type="text" value={lastname} onChange={e => setLastname(e.target.value)} />
+          <input type="text" className="form-control" value={lastname} onChange={(e) => setLastname(e.target.value)} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Fecha de Nacimiento:</label>
-          <input type="text" value={fechaNac} onChange={e => setFechaNac(e.target.value)} />
+          <input type="text" className="form-control" value={fechaNac} onChange={(e) => setFechaNac(e.target.value)} />
         </div>
-        <div>
+        <div className="form-group">
           <label>País:</label>
-          <input type="text" value={pais} onChange={e => setPais(e.target.value)} />
+          <input type="text" className="form-control" value={pais} onChange={(e) => setPais(e.target.value)} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Wallet:</label>
-          <input type="text" value={wallet} onChange={e => setWallet(e.target.value)} />
+          <input type="text" className="form-control" value={wallet} onChange={(e) => setWallet(e.target.value)} />
         </div>
         <div>
-          <button type="submit">Guardar cambios</button>
-          <Link to="/Profile">Volver a perfil</Link>
+          <button type="submit" className="btn btn-primary mr-2">Guardar cambios</button>
+          <Link to="/Profile" className="btn btn-secondary">Volver a perfil</Link>
         </div>
       </form>
 
-       < UploadImage id = {userData.id}/>
-
-
+      <UploadImage id={id} />
     </div>
   );
-}
+};
 
 export default EditUsuario;
-
 
