@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { banckend_URL } from "./DataComponents/config";
 
 function Signup() {
   const [username, setUsername] = useState('');
@@ -13,7 +14,7 @@ function Signup() {
   const navigate = useNavigate();
 
   const registerUser = () => {
-    axios.post('http://127.0.0.1:5000/signup', {
+    axios.post(`${banckend_URL}/signup`, {
       username: username,
       email: email,
       firstname: firstname,

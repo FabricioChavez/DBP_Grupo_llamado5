@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { MangaList } from "./mangalist.js";
+import { banckend_URL } from "./config.js";
 
 function Manga_fetch(props) {
   const {userdata}=props
   const [manga, setManga] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/manga', {
+    fetch(`${banckend_URL}/manga`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"

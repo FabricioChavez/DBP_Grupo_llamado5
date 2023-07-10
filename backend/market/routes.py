@@ -356,6 +356,9 @@ def route_compra():
         data = request.get_json()
         fecha_string = data['fecha']
         fecha = datetime.strptime(fecha_string, '%Y-%m-%d').date()
+        id_usuario = data['id_user']
+        manga_nombre = data['manga_nombre']
+        manga_edicion = data['manga_edicion']
         new_compra = Compra(id_user=data['id_user'], manga_nombre=data['manga_nombre'],
                             manga_edicion=data['manga_edicion'], fecha=fecha)
         db.session.add(new_compra)

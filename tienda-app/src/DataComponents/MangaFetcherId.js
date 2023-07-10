@@ -4,6 +4,9 @@ import './MangaId.css';
 import Comment_client from "./CommentClient";
 import ImageGet from "./imageFetcher";
 import Modal from "./Modal";
+import { banckend_URL } from "./config";
+
+
 function MangaFetcherId(props) {
   const Param = useParams();
   const id = Param.id;
@@ -40,7 +43,7 @@ function MangaFetcherId(props) {
     };
 
 
-    fetch("http://127.0.0.1:5000/comentario", {
+    fetch(`${banckend_URL}/comentario`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -58,14 +61,14 @@ function MangaFetcherId(props) {
   };
 
   const fetchComments = () => {
-    fetch(`http://127.0.0.1:5000/comentario/by/${id}`)
+    fetch(`${banckend_URL}/comentario/by/${id}`)
       .then(resp => resp.json())
       .then(data => setComments(data))
       .catch(error => console.log(error));
   };
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/manga/${id}`)
+    fetch(`${banckend_URL}/manga/${id}`)
       .then(resp => resp.json())
       .then(data => setManga(data))
       .catch(error => console.log(error));

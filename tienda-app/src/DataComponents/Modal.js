@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Modal.css";
+import { banckend_URL } from "./config";
 
 const Modal = ({ userData, handleClose, manga }) => {
   function obtenerFechaActual() {
@@ -10,6 +11,7 @@ const Modal = ({ userData, handleClose, manga }) => {
     const fechaActual = `${year}-${month}-${day}`;
     return fechaActual;
   }
+
   const [user_prov, setuser_prov] = useState(null);
 
   const fechaActual = obtenerFechaActual();
@@ -22,26 +24,37 @@ const Modal = ({ userData, handleClose, manga }) => {
       manga_edicion: manga.edicion,
       fecha: obtenerFechaActual()
     };
-    try {
-      const response = await fetch('http://127.0.0.1:5000/compra', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(compra)
-      });
+    
 
-      if (response.ok) {
-        console.log('Compra realizada exitosamente');
-      } else {
-        console.error('Error al realizar la compra');
-      }
-    } catch (error) {
-      console.error('Error de red:', error);
-    }
+
     console.log(userData.wallet - manga.precio);
     console.log(manga.cant_stock);
-    if (userData.wallet - manga.precio > 0 && manga.cant_stock > 0) {
+
+    if (userData.wallet >= manga.precio && manga.cant_stock > 0) {
+
+      try {
+        const response = await fetch(`${banckend_URL}/compra`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(compra)
+        });
+  
+        if (response.ok) {
+          console.log('Compra realizada exitosamente');
+        } 
+        
+        else {
+          console.error('Error al realizar la compra');
+        }
+      }
+      
+      catch (error) {
+        console.error('Error de red:', error);
+      }
+
+
 
       const data_user = {
         id: userData.id,
@@ -64,7 +77,7 @@ const Modal = ({ userData, handleClose, manga }) => {
         link: manga.link
       };
 
-      const user_response = await fetch(`http://127.0.0.1:5000/users/${userData.id}`, {
+      const user_response = await fetch(`${banckend_URL}/users/${userData.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +85,7 @@ const Modal = ({ userData, handleClose, manga }) => {
         body: JSON.stringify(data_user)
       });
 
-      const manga_response = await fetch(`http://127.0.0.1:5000/manga/${manga.id}`, {
+      const manga_response = await fetch(`${banckend_URL}/manga/${manga.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -85,8 +98,14 @@ const Modal = ({ userData, handleClose, manga }) => {
         setuser_prov(data_user);
         localStorage.setItem('userData', JSON.stringify(data_user));
       }
-    } else {
-      console.log('Error al realizar la compra por PUT DE USERS o MANGA ');
+    } 
+    
+    else if (userData.wallet <  manga.precio){
+       alert("Compra no valida, revise su saldo");
+    }
+
+    else if (manga.cant_stock < 0){
+        alert("No hay mangas en stock");
     }
 
     window.location.reload();

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { banckend_URL } from "./config";
 
 function Comment_client({id}) {
 
@@ -9,7 +10,7 @@ function Comment_client({id}) {
   });
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/users/${id}`)
+    fetch(`${banckend_URL}/users/${id}`)
       .then((resp) => resp.json())
       .then((data) => {
         setCurrentuser(data);

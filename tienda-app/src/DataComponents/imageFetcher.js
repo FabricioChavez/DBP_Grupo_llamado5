@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { banckend_URL } from "./config";
 
 
 function ImageGet({id}) {
@@ -7,7 +8,7 @@ function ImageGet({id}) {
 
   const fetchImageData = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/image/${id}`);
+      const response = await fetch(`${banckend_URL}/image/${id}`);
       if (response.ok) {
         const imageData = await response.json();
         setImageUrl(imageData.data);

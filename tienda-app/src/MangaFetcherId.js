@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import './MangaId.css';
+import { banckend_URL } from "./DataComponents/config";
 
 function MangaFetcherId(props) {
   const { id } = props;
   const [manga, setManga] = useState(null);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/manga/${id}`)
+    fetch(`${banckend_URL}/manga/${id}`)
       .then(resp => resp.json())
       .then(data => setManga(data))
       .catch(error => console.log(error));

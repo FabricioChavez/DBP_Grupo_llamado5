@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import localStorage from 'localStorage';
-
+import { banckend_URL } from './DataComponents/config';
 function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,14 +11,17 @@ function Login({ onLogin }) {
   const logInUser = () => {
     if (email.length === 0) {
       alert('Email has been left blank!');
-    } else if (password.length === 0) {
+    } 
+    
+    else if (password.length === 0) {
       alert('Password has been left blank!');
-    } else {
-      axios
-        .post('http://127.0.0.1:5000/login', {
+    } 
+    
+    else {
+      axios.post(`${banckend_URL}/login`, {
           email: email,
           password: password
-        })
+      })
         .then(function (response) {
           console.log(response);
           const data = response.data

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import UploadImage from './ImageUpload';
+import { banckend_URL } from './config';
 
 const EditUsuario = (props) => {
   const { userData } = props;
@@ -35,7 +36,7 @@ const EditUsuario = (props) => {
   };
 
   const update = (updatedData) => {
-    fetch(`http://127.0.0.1:5000/users/${userData.id}`, {
+    fetch(`${banckend_URL}/users/${userData.id}`, {
       method: 'PUT',
       body: JSON.stringify(updatedData),
       headers: {
@@ -55,7 +56,7 @@ const EditUsuario = (props) => {
         };
 
         localStorage.setItem('userData', JSON.stringify(updatedData));
-        /*window.location.reload();*/
+        
         navigate('/Profile')
       })
       .catch((error) => {

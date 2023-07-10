@@ -18,7 +18,7 @@ function App() {
   };
 
   useEffect(() => {
-    const storedData = localStorage.getItem('userData');
+    const storedData = localStorage.getItem('userData'); 
     if (storedData) {
       setUserData(JSON.parse(storedData));
     }

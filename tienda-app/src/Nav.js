@@ -4,7 +4,7 @@
   import Carousel from "react-elastic-carousel";
   import Item from "./Item";
   import { useState, useEffect } from "react";
-
+  import { banckend_URL } from './DataComponents/config';
 
 
 function Navbar({ children }) {
@@ -153,7 +153,7 @@ function Principal2() {
     const [manga, setManga] = useState([]);
 
     useEffect(() => {
-      fetch("http://127.0.0.1:5000/manga", {
+      fetch(`${banckend_URL}/manga`, {
         'methods': "GET",
         headers: {
           "Content-Type": "application/json"

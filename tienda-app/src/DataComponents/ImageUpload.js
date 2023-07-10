@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
+import { banckend_URL } from './config';
 
 function UploadImage(props) {
   const { id } = props
@@ -18,20 +19,20 @@ function UploadImage(props) {
     formData.append('image', selectedFile);
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/upload/${id}`, {
+      const response = await fetch(`${banckend_URL}/upload/${id}`, {
         method: 'POST',
         body: formData,
       });
 
       if (response.ok) {
-        // Image uploaded successfully, handle success if needed
+    
         console.log('Image uploaded successfully');
       } else {
-        // Error occurred during upload, handle error if needed
+        
         console.log('Error uploading image');
       }
     } catch (error) {
-      // Network or other error occurred, handle error if needed
+     
       console.log('Network or other error occurred');
     }
   };

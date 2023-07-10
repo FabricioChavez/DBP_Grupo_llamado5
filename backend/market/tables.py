@@ -1,8 +1,8 @@
-import datetime
+
 from market import db
 from dataclasses import dataclass
 from datetime import date
-from flask_sqlalchemy import SQLAlchemy
+
 
 
 @dataclass
@@ -44,7 +44,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.username}>'
 
-
+@dataclass
 class User_pfp(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))

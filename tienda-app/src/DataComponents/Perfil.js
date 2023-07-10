@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { banckend_URL } from "./config";
 
 const Profile = (props) => {
   const { userData } = props;
@@ -8,12 +9,13 @@ const Profile = (props) => {
 
   useEffect(() => {
     if (userData) {
-      fetch(`http://127.0.0.1:5000/compraUser/${userData.id}`)
+      fetch(`${banckend_URL}/compraUser/${userData.id}`)
         .then(response => response.json())
         .then(data => setCompras(data))
         .catch(error => console.log(error));
     }
   }, [userData]);
+
 
   if (!userData) {
     return <div>Loading ....</div>;

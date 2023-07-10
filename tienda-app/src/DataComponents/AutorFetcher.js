@@ -1,12 +1,15 @@
 import React from "react"
 import AutorList from "./AutorList";
 import { useState , useEffect } from "react";
+import { banckend_URL } from "./config";
 function Autor_fetch(){
 
+  
     const [data ,setdata]=useState([])
     
+
     useEffect(()=>{
-        fetch('http://127.0.0.1:5000/autor',
+        fetch(`${banckend_URL}/autor`,
         {'methods':'GET',
           headers:{
             'Content-Type':'applications/json'
