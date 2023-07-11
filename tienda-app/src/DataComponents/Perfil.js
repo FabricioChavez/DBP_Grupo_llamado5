@@ -13,6 +13,9 @@ const Profile = (props) => {
         .then(response => response.json())
         .then(data => setCompras(data))
         .catch(error => console.log(error));
+      
+      
+      
     }
   }, [userData]);
 
@@ -32,6 +35,11 @@ const Profile = (props) => {
         <h2>Apellido: {userData.lastname}</h2>
         <h2>País: {userData.pais}</h2>
         <h2>Saldo: {userData.wallet}</h2>
+      </div>
+
+      <div className="my-4">
+        <Link to="/Edit" className="btn btn-primary mr-2">Editar</Link>
+        <Link to="/interfaz" className="btn btn-secondary">Volver</Link>
       </div>
 
       <div className="my-4">
@@ -64,10 +72,7 @@ const Profile = (props) => {
         )}
       </div>
 
-      <div className="my-4">
-        <Link to="/Edit" className="btn btn-primary mr-2">Editar</Link>
-        <Link to="/interfaz" className="btn btn-secondary">Volver</Link>
-      </div>
+      
     </div>
   );
 };

@@ -94,18 +94,15 @@ const Modal = ({ userData, handleClose, manga }) => {
       });
 
       if (user_response.ok && manga_response.ok) {
-        console.log("SE HIZO COMPRA ADECUADAMENTE")
+        alert(`SE HIZO COMPRA ADECUADAMENTE!! Saldo Gastado: ${manga.precio} `);
         setuser_prov(data_user);
+
         localStorage.setItem('userData', JSON.stringify(data_user));
       }
     } 
     
-    else if (userData.wallet <  manga.precio){
-       alert("Compra no valida, revise su saldo");
-    }
-
-    else if (manga.cant_stock < 0){
-        alert("No hay mangas en stock");
+    else{
+       alert('Error, no se pudo realizar la compra');
     }
 
     window.location.reload();
