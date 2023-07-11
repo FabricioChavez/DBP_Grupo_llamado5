@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { banckend_URL } from "./config";
-
+import ImageGet from "./imageFetcher";
 const Profile = (props) => {
   const { userData } = props;
   const [compras, setCompras] = useState([]);
@@ -35,6 +35,7 @@ const Profile = (props) => {
         <h2>Apellido: {userData.lastname}</h2>
         <h2>País: {userData.pais}</h2>
         <h2>Saldo: {userData.wallet}</h2>
+        <ImageGet id={userData.id}/>
       </div>
 
       <div className="my-4">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import UploadImage from './ImageUpload';
+import {UploadImage,UpdateImage} from './ImageUpload';
 import { banckend_URL } from './config';
 
 const EditUsuario = (props) => {
@@ -101,7 +101,10 @@ const EditUsuario = (props) => {
         </div>
       </form>
 
-      <UploadImage id={id} />
+      <h> Subir imagen por primera vez <UploadImage id={id} /></h>
+      <h> Editar o actualizar imagen :   <UpdateImage id={id}/></h>
+     
+      
     </div>
   );
 };

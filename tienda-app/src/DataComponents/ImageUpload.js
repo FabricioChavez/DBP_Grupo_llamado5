@@ -2,6 +2,54 @@ import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { banckend_URL } from './config';
 
+const UpdateImage = (props) => {
+  const { id } = props;
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Verificar si se seleccionó un archivo
+    if (!selectedFile) {
+      console.log('Please select an image to upload');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', selectedFile);
+
+    try {
+      const response = await fetch(`${banckend_URL}/upload/${id}`, {
+        method: 'PUT',
+        body: formData,
+      });
+
+      if (response.ok) {
+        alert('Se actualizo correctamente')
+      } else {
+        alert('Error al actualizar imagen')
+      }
+    } catch (error) {
+      // Imprimir el error en la consola para facilitar la depuración
+      console.log('Network or other error occurred', error);
+    }
+  };
+
+  // Asegúrate de incluir el formulario y el campo de archivo en el renderizado del componente
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="file" onChange={handleFileChange} />
+      <button type="submit">Upload Image</button>
+    </form>
+  );
+};
+
+
+
 function UploadImage(props) {
   const { id } = props
   const [selectedFile, setSelectedFile] = useState(null);
@@ -26,10 +74,10 @@ function UploadImage(props) {
 
       if (response.ok) {
     
-        console.log('Image uploaded successfully');
+        alert('Se subio correctamente ')
       } else {
         
-        console.log('Error uploading image');
+        console.log('No se subio correcametne');
       }
     } catch (error) {
      
@@ -45,4 +93,8 @@ function UploadImage(props) {
   );
 }
 
-export default UploadImage;
+
+
+
+
+export {UploadImage , UpdateImage}

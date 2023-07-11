@@ -161,7 +161,7 @@ with app.app_context():
 app.app_context().push()
 
 
-@app.route('/upload/<user_id>', methods=['POST'])
+@app.route('/upload/<user_id>', methods=['POST' , 'PUT'])
 def upload(user_id):
     if request.method == 'POST':
         file = request.files['image']
@@ -183,6 +183,28 @@ def upload(user_id):
         db.session.commit()
 
         return 'SUCCESS'
+    elif request.method == 'PUT':
+        # Procesar el archivo y extraer información
+        file = request.files['image']
+        file_data = file.read()
+        file_name = file.filename
+        file_size = len(file_data)
+
+        # Buscar el registro de la imagen del perfil del usuario
+        user_pfp = User_pfp.query.filter_by(user_id=user_id).first()
+        if user_pfp is not None:
+            # Actualizar la información del perfil del usuario
+            user_pfp.name = file_name
+            user_pfp.size = file_size
+            user_pfp.data = file_data
+
+            # Actualizar la instancia en la base de datos
+            db.session.commit()
+            return 'SUCCESS'
+        else:
+            # Si no se encontró la imagen de perfil del usuario, devuelve un error
+            return 'ERROR: No existe imagen de perfil para este usuario'
+
 
 
 
