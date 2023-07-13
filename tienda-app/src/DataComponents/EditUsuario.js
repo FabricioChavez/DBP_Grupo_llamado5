@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import {UploadImage,UpdateImage} from './ImageUpload';
+import { UploadImage, UpdateImage } from './ImageUpload';
 import { banckend_URL } from './config';
 
-const EditUsuario = (props) => {
-  const { userData } = props;
-
+const EditUsuario = ({userData , setUserData}) => {
+  
   const navigate = useNavigate();
 
   const [username, setUsername] = useState(userData ? userData.username : '');
@@ -54,10 +53,10 @@ const EditUsuario = (props) => {
           wallet,
           id
         };
-
+        setUserData(updatedData);
         localStorage.setItem('userData', JSON.stringify(updatedData));
         
-        navigate('/Profile')
+        navigate('/Profile');
       })
       .catch((error) => {
         console.error('Error al guardar los cambios:', error);
@@ -67,47 +66,48 @@ const EditUsuario = (props) => {
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Username:</label>
-          <input type="text" className="form-control" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">Username:</label>
+          <input type="text" className="form-control" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label>Email:</label>
-          <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">Email:</label>
+          <input type="text" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label>Nombre:</label>
-          <input type="text" className="form-control" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+        <div className="mb-3">
+          <label htmlFor="firstname" className="form-label">Nombre:</label>
+          <input type="text" className="form-control" id="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label>Apellido:</label>
-          <input type="text" className="form-control" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+        <div className="mb-3">
+          <label htmlFor="lastname" className="form-label">Apellido:</label>
+          <input type="text" className="form-control" id="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label>Fecha de Nacimiento:</label>
-          <input type="text" className="form-control" value={fechaNac} onChange={(e) => setFechaNac(e.target.value)} />
+        <div className="mb-3">
+          <label htmlFor="fechaNac" className="form-label">Fecha de Nacimiento:</label>
+          <input type="text" className="form-control" id="fechaNac" value={fechaNac} onChange={(e) => setFechaNac(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label>País:</label>
-          <input type="text" className="form-control" value={pais} onChange={(e) => setPais(e.target.value)} />
+        <div className="mb-3">
+          <label htmlFor="pais" className="form-label">País:</label>
+          <input type="text" className="form-control" id="pais" value={pais} onChange={(e) => setPais(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label>Wallet:</label>
-          <input type="text" className="form-control" value={wallet} onChange={(e) => setWallet(e.target.value)} />
+        <div className="mb-3">
+          <label htmlFor="wallet" className="form-label">Wallet:</label>
+          <input type="text" className="form-control" id="wallet" value={wallet} onChange={(e) => setWallet(e.target.value)} />
         </div>
-        <div>
-          <button type="submit" className="btn btn-primary mr-2">Guardar cambios</button>
+        <div className="mb-3">
+          <button type="submit" className="btn btn-primary me-2">Guardar cambios</button>
           <Link to="/Profile" className="btn btn-secondary">Volver a perfil</Link>
         </div>
+
+        <h>Subir imagen por primera vez: <UploadImage id={id} /></h>
+        <br></br>
+        <h>Editar o actualizar imagen: <UpdateImage id={id} /></h>
       </form>
 
-      <h> Subir imagen por primera vez <UploadImage id={id} /></h>
-      <h> Editar o actualizar imagen :   <UpdateImage id={id}/></h>
-     
       
+
     </div>
   );
 };
 
 export default EditUsuario;
-

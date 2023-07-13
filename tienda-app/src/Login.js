@@ -3,18 +3,18 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import localStorage from 'localStorage';
 import { banckend_URL } from './DataComponents/config';
-function Login({ onLogin }) {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const logInUser = () => {
     if (email.length === 0) {
-      alert('Email has been left blank!');
+      alert('No puso email');
     } 
     
     else if (password.length === 0) {
-      alert('Password has been left blank!');
+      alert('contraeña en blanco');
     } 
     
     else {
@@ -26,13 +26,13 @@ function Login({ onLogin }) {
           console.log(response);
           const data = response.data
           localStorage.setItem('userData', JSON.stringify(data));
-          onLogin(data); 
+          /*onLogin(data);*/ 
           navigate('/interfaz');
         })
         .catch(function (error) {
           console.log(error, 'error');
           if (error.response.status === 401) {
-            alert('Invalid credentials');
+            alert('email o contraseña no validos');
           }
         });
     }

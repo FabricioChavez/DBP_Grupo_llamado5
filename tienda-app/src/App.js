@@ -34,8 +34,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/interfaz" element={<Interfaz userdata={userData} />} />
           <Route path="/prueba/:id" element={<Comment_client  />} />
-          <Route path = "/Profile" element = {<Profile userData = {userData}/>}></Route>
-          <Route path = "/Edit" element = {<EditUsuario userData = {userData}    />}>  </Route>
+          <Route path = "/Profile" element = {<Profile userData = {userData} setUserData  = {setUserData}  />}></Route>
+          <Route path = "/Edit" element = {<EditUsuario userData = {userData}   setUserData = {setUserData} />}>  </Route>
         </Routes >
       </Router>
     </div>

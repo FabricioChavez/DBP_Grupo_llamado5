@@ -12,8 +12,6 @@ const UpdateImage = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Verificar si se seleccionó un archivo
     if (!selectedFile) {
       console.log('Please select an image to upload');
       return;
@@ -34,12 +32,12 @@ const UpdateImage = (props) => {
         alert('Error al actualizar imagen')
       }
     } catch (error) {
-      // Imprimir el error en la consola para facilitar la depuración
+      
       console.log('Network or other error occurred', error);
     }
   };
 
-  // Asegúrate de incluir el formulario y el campo de archivo en el renderizado del componente
+  
   return (
     <form onSubmit={handleSubmit}>
       <input type="file" onChange={handleFileChange} />

@@ -38,8 +38,7 @@ function MangaFetcherId(props) {
     const newComment = {
       contenido: comment,
       user_id: userData.id,
-      manga_nombre: manga.nombre,
-      manga_edicion: manga.edicion
+      manga_id : id
     };
 
 

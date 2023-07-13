@@ -59,9 +59,6 @@ function Interfaz({ userdata }) {
           </h1>
         </div>
           <div className="home__search-container">
-            <div className='homes'>
-              <button onClick={"tohome"}>Home</button>
-            </div>
             <div className="box">
             <select id="categorias" name="categorias" value={selection} onChange={handleChange}>
               <option value="">General</option>

@@ -20,8 +20,7 @@ const Modal = ({ userData, handleClose, manga }) => {
   const handleCompra = async () => {
     const compra = {
       id_user: userData.id,
-      manga_nombre: manga.nombre,
-      manga_edicion: manga.edicion,
+      manga_id : manga.id,
       fecha: obtenerFechaActual()
     };
     
@@ -72,7 +71,6 @@ const Modal = ({ userData, handleClose, manga }) => {
         edicion: manga.edicion,
         cant_stock: manga.cant_stock - 1,
         genero: manga.genero,
-        autor_id: manga.autor_id,
         precio: manga.precio,
         link: manga.link
       };

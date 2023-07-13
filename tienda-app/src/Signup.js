@@ -12,7 +12,7 @@ function Signup() {
   const [pais, setPais] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+  const [wallet , setWallet] = useState(0);
   const registerUser = () => {
     axios.post(`${banckend_URL}/signup`, {
       username: username,
@@ -21,7 +21,8 @@ function Signup() {
       lastname: lastname,
       fechaNac: fechaNac,
       pais: pais,
-      password: password
+      password: password,
+      wallet : wallet
     })
       .then(function (response) {
         console.log(response);
@@ -80,6 +81,9 @@ function Signup() {
                 <div className="text-center">
                   <button type="button" className="btn btn-primary" onClick={registerUser}>Sign Up</button>
                 </div>
+
+                
+
               </form>
               <p className="small text-center mt-3 mb-0">Already have an account? <a href="/login" className="text-danger">Login</a></p>
             </div>
