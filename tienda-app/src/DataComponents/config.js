@@ -1,1 +1,3 @@
-export const banckend_URL = "http://127.0.0.1:5000";
+export const banckend_URL = "http://18.235.183.107:8000";
+
+/*http://18.235.183.107:8000*/

@@ -99,13 +99,14 @@ const EditUsuario = ({userData , setUserData}) => {
           <Link to="/Profile" className="btn btn-secondary">Volver a perfil</Link>
         </div>
 
-        <h>Subir imagen por primera vez: <UploadImage id={id} /></h>
+        
+      </form>
+        
+      <h>Subir imagen por primera vez: <UploadImage id={id} /></h>
         <br></br>
         <h>Editar o actualizar imagen: <UpdateImage id={id} /></h>
-      </form>
-
       
-
+      
     </div>
   );
 };
